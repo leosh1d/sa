@@ -43,7 +43,7 @@ export const RollupPattern = (props: HTMLChakraProps<"svg">)=> {
             </g>
             <defs>
                 <filter id="filter0_f_520_504" x="186.7" y="-94.3672" width="396.766" height="394.791"
-                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                        filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
                     <feFlood floodOpacity="0" result="BackgroundImageFix"/>
                     <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
                     <feGaussianBlur stdDeviation="10" result="effect1_foregroundBlur_520_504"/>

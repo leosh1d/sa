@@ -1,4 +1,3 @@
-import './App.css'
 import {Heading, Stack, Text, Box, Flex, VStack, Divider} from "@chakra-ui/react";
 import {RollupPattern} from "./components/rollupPattern.tsx";
 import {SocialMediaLink} from "./components/socialMediaLink.tsx";
@@ -10,13 +9,15 @@ function App() {
 
   return (
     <>
+
+
       <Stack h={`-webkit-fill-available`} w={`100vw`} overflow={`hidden`} justifyContent="space-between" alignItems="center" spacing={4}>
           <Box pos={'absolute'} >
               <RollupPattern w={`100vw`}/>
           </Box>
           <Flex mt={'5rem'} pos={`relative`} justifyContent={`center`} alignItems={'center'}>
               <Box>
-                  <Heading variant={`flex`} w={`auto`} lineHeight={1}>студактив</Heading>
+                  <Heading as={'h1'} variant={`flex`} w={`auto`} fontSize={'3rem'} lineHeight={1}>студактив</Heading>
                   <Text textAlign={`right`}>бизнес-информатики</Text>
               </Box>
           </Flex>
