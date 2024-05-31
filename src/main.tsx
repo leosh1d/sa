@@ -8,18 +8,18 @@ import {
     createBrowserRouter,
     RouterProvider,
 } from "react-router-dom";
-import App from './App.tsx'
+import Rollup from './Rollup.tsx'
 import './index.css'
 
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <App/>,
+        element: <Rollup/>,
     },
     {
         path: "/rollup",
-        element: <App/>,
+        element: <Rollup/>,
     },
 ]);
 
@@ -27,7 +27,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
       <ChakraProvider theme={theme}>
-          <RouterProvider router={router} />
+          <RouterProvider router={router}/>
       </ChakraProvider>
   </React.StrictMode>,
 )
