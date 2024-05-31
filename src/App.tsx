@@ -23,9 +23,9 @@ function App() {
               </Box>
           </Flex>
           <VStack w={`full`} maxW={1024} pb={{xl: 24}} divider={<Divider borderColor={`rgba(46, 57, 118)`} opacity={0.12}/>}>
-              <SocialMediaLink href={'https://vk.com/studaktiv_bi'} icon={<Vk w={'16'} h={'16'}/>} buttonText={'посмотреть'}/>
+              <SocialMediaLink href={'https://vk.com/studaktiv_bi'} icon={<Vk w={'16'} h={'16'}/>} buttonText={'перейти'}/>
               <SocialMediaLink href={'https://www.instagram.com/bi.inside_?igsh=MW5pczI1cWpjcmdtOQ=='} icon={<Inst w={'16'} h={'16'}/>} buttonText={'перейти'}/>
-              <SocialMediaLink href={'https://t.me/studaktivbi'} icon={<Tg w={'16'} h={'16'}/>} buttonText={'глянуть'}/>
+              <SocialMediaLink href={'https://t.me/studaktivbi'} icon={<Tg w={'16'} h={'16'}/>} buttonText={'перейти'}/>
           </VStack>
       </Stack>
     </>
