@@ -35,7 +35,7 @@ function Rollup() {
                                      buttonText={'перейти'}/>
                     <SocialMediaLink href={'https://t.me/studaktivbi'} icon={<Tg w={'16'} h={'16'}/>}
                                      buttonText={'перейти'}/>
-                    <SocialMediaLink href={'https://www.instagram.com/bi.inside_?igsh=MW5pczI1cWpjcmdtOQ=='}
+                    <SocialMediaLink href={'https://www.instagram.com/studaktivbi?igsh=MWd6enViM3VjYmlz&utm_source=qr'}
                                                                                icon={<Inst w={'16'} h={'16'}/>} buttonText={'перейти'}/>
                 </VStack>
             </Stack>
