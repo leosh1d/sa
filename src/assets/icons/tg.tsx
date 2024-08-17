@@ -1,3 +1,6 @@
+"use client"
+
+
 import {chakra, HTMLChakraProps} from "@chakra-ui/react";
 
 export const Tg = (props: HTMLChakraProps<`svg`>)=> {

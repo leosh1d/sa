@@ -1,3 +1,5 @@
+"use client"
+
 import {Stack, Text, Link} from '@chakra-ui/react'
 export const Footer = ()=> {
     return <Stack  w={`full`}>

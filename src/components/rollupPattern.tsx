@@ -1,3 +1,4 @@
+"use client"
 import {chakra, HTMLChakraProps} from "@chakra-ui/react";
 
 export const RollupPattern = (props: HTMLChakraProps<"svg">)=> {
