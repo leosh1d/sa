@@ -6,7 +6,6 @@ import {FC, useEffect} from "react";
 import {useCommonState} from "@/state/common/commonState";
 import {useSearchParams} from "next/navigation";
 import {actionAfterExchangeCode} from "@/components/auth/actionAfterExchangeCode";
-import {getUserDataFromVk} from "@/components/auth/getUserDataFromVk";
 
 
 const initVKID = () => VKID.Config.init({

@@ -1,5 +1,5 @@
 'use client'
-import {VStack, Text, Box} from "@chakra-ui/react";
+import {VStack, Text} from "@chakra-ui/react";
 import {EventCardFull} from "@/components/events/eventCard";
 import Script from "next/script";
 
