@@ -1,0 +1,1 @@
+export type eventType = "posvyat" | "drbi" | "povishay" | "gya" | "lpf" | "cum"
