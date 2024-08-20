@@ -6,7 +6,6 @@ import {FC, useEffect} from "react";
 import {useCommonState} from "@/state/common/commonState";
 import {useSearchParams} from "next/navigation";
 import {actionAfterExchangeCode} from "@/components/auth/actionAfterExchangeCode";
-import {getUserDataFromVk} from "@/components/auth/getUserDataFromVk";
 
 
 const initVKID = () => VKID.Config.init({
@@ -19,7 +18,7 @@ const initVKID = () => VKID.Config.init({
 })
 
 export const VkIdProvider: FC<WrapperProps> = ({children}) => {
-    const {vkIdConfig: stateVkIdConfig, setVkIdConfig, setUserInfo, setIsAuthorized} = useCommonState()
+    const {vkIdConfig: stateVkIdConfig, setVkIdConfig, setIsAuthorized} = useCommonState()
     useEffect(() => {
         if (stateVkIdConfig === undefined) {
             const config = initVKID()
@@ -39,7 +38,7 @@ export const VkIdProvider: FC<WrapperProps> = ({children}) => {
                 })
             })
         }
-    }, [code, deviceId]);
+    }, [code, deviceId, setIsAuthorized]);
 
 
     return <>{children}</>
