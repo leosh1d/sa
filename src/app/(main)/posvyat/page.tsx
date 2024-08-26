@@ -17,8 +17,10 @@ export default function Home() {
 
             <Stack spacing={4} direction={{base: 'column', md: 'row'}}>
                 <CoordCard name='сластионов никита' img='/ns.jpeg' description='руководитель студактива бизнес-информатики' tgLink='slastionov'/>
-                <CoordCard name='воробьев кирилл' img='/vk.jpeg' description={`главный координатор посвят'а 2024, заместитель руководителя студактива бизнес-информатики`} tgLink='jknfeel'/>
-                <CoordCard name='рыжов кирилл' img='/rk.jpeg' description='Глава SMM и медиа отдела' tgLink='kruzhovv'/>
+                <CoordCard name='воробьев кирилл' img='/vk.jpeg' description='главный координатор посвята 2024' tgLink='jknfeel'/>
+                <CoordCard name='софия маслова' img='/sm.jpeg' description='глава программы' tgLink='kruzhovv'/>
+
+                <CoordCard name='рыжов кирилл' img='/rk.jpeg' description='глава SMM и медиа отдела' tgLink='sofams'/>
 
             </Stack>
 

@@ -141,6 +141,11 @@ export const RegModal = () => {
                                 <Input name='social' onChange={handleInputChange}/>
                             </FormControl>
 
+                            <FormControl isRequired>
+                                <FormLabel>телефон</FormLabel>
+                                <Input name='phone' onChange={handleInputChange}/>
+                            </FormControl>
+
                             <FormControl>
                                 <FormLabel>с кем бы вы хотели жить</FormLabel>
                                 <Input name='living' onChange={handleInputChange}/>

@@ -9,18 +9,16 @@ interface CoordCardProps {
 }
 
 export const CoordCard:FC<CoordCardProps> = ({img, description, name, tgLink})=> {
-    return <Card borderRadius='24px' overflow='hidden' color='zhgut.500'>
+    return <Card flexGrow={1} borderRadius='24px' overflow='hidden' color='zhgut.500'>
 
         <Image src={img} alt={name}  objectFit='cover'/>
         <CardBody p={4}>
             <Flex direction='column' justifyContent='space-between' h='full' gap={4}>
-
                 <Box>
-
                     <Heading fontSize='3xl' pb={4}>{name}</Heading>
-        <Text>
-            {description}
-        </Text>
+                <Text>
+                    {description}
+                </Text>
 
                 </Box>
 

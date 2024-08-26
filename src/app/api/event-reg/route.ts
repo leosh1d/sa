@@ -28,6 +28,8 @@ export async function POST(request: Request) {
     const social = formData.get('social')
 
     const living = formData.get('living')
+    const phone = formData.get('living')
+
 
     const token = formData.get('token')
     const docs = formData.get(`docs`) as File
@@ -105,7 +107,7 @@ export async function POST(request: Request) {
             range,
             valueInputOption: 'USER_ENTERED',
             requestBody: {
-                values: [[new Date().toLocaleString("ru-RU", {timeZone: "Europe/Moscow"}), fio, social, '', '', living, '', publicCheckUrl, publicDocsUrl, 'false', 'false',token]],
+                values: [[new Date().toLocaleString("ru-RU", {timeZone: "Europe/Moscow"}), fio, social, phone, '', living, '', publicCheckUrl, publicDocsUrl, 'false', 'false',token]],
             },
         });
 
