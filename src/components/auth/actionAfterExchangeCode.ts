@@ -16,7 +16,7 @@ export const actionAfterExchangeCode = async (r: Omit<TokenResult, 'id_token'>)=
     if(userInDB === null){
         await addUser(r.user_id, {
             access_token: r.access_token,
-
+            user_id: `${r.user_id}`,
             events: []
         })
     } else if (userInDB.access_token !== r.access_token) {
