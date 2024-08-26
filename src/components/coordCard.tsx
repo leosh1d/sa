@@ -9,7 +9,7 @@ interface CoordCardProps {
 }
 
 export const CoordCard:FC<CoordCardProps> = ({img, description, name, tgLink})=> {
-    return <Card flexGrow={1} borderRadius='24px' overflow='hidden' color='zhgut.500'>
+    return <Card background='fentanylLight' flexGrow={1} borderRadius='24px' overflow='hidden' color='zhgut.500'>
 
         <Image src={img} alt={name}  objectFit='cover'/>
         <CardBody p={4}>

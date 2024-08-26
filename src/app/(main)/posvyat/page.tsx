@@ -2,7 +2,6 @@
 import {VStack, Box, Card,Text, Stack} from "@chakra-ui/react";
 import {EventCardFull} from "@/components/events/eventCard";
 import {useRef} from "react";
-import ChakraCarousel from "@/components/carousel/carousel";
 import {CoordCard} from "@/components/coordCard";
 
 export default function Home() {
