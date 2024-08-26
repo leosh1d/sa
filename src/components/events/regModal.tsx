@@ -12,7 +12,7 @@ import {
     Flex,
     Text,
     Box,
-    Link, HStack
+    Link, HStack, useToast
 } from "@chakra-ui/react";
 import {ChangeEventHandler, FormEventHandler, useCallback, useState} from "react";
 import useWindowSize from 'react-use/lib/useWindowSize'
@@ -47,11 +47,22 @@ export const RegModal = () => {
     const [docsFile, setDocs] = useState<File | null>(null)
     const [checkFile, setCheckFile] = useState<File | null>(null)
 
+    const toast = useToast()
+
     const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         setIsLoading.on()
 
         if(!docsFile || !checkFile){
+            toast({
+                title: "ошибка!",
+                status: 'error',
+                description: "заполни поля с файлами",
+                isClosable: true,
+
+            })
+            setIsLoading.off()
+
             return
         }
 
@@ -176,7 +187,7 @@ export const RegModal = () => {
                 </ModalHeader>
                 <ModalCloseButton/>
                 <ModalBody>
-                    <Text pb={4}>оплата ждёт подтверждения, статус можно проверить в лк</Text>
+                    <Text pb={4}>оплата ждёт подтверждения, статус можно проверить на страничке аккаунта</Text>
                 </ModalBody>
                 <Box position='fixed' left={0} top={0} zIndex={-1}>
                     <Confetti recycle={showConfetti} width={width} height={height}/>
