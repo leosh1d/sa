@@ -114,7 +114,7 @@ export const RegModal = () => {
 
 
     return <>
-        <Button onClick={onOpen} variant={`solid`} colorScheme={`zhgut`} isDisabled={!isAuthorized}>{isAuthorized ? 'регистрация' : 'авторизируйся, чтобы зарегистрироваться'} </Button>
+        <Button w='full'  onClick={onOpen} variant={`solid`} colorScheme={`zhgut`} isDisabled={!isAuthorized}>{isAuthorized ? 'регистрация' : 'войди, чтобы зарегаться'} </Button>
         <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay/>
             <ModalContent>
@@ -146,7 +146,7 @@ export const RegModal = () => {
                                 <Input name='living' onChange={handleInputChange}/>
                             </FormControl>
 
-                            <Text>Необходимо оплатить 4400₽</Text>
+                            <Text>необходимо оплатить 4400₽</Text>
                             <HStack>
                                 <Input readOnly value='2200700446964883'/>
                                 <Button colorScheme='zhgut' px={12} onClick={onCopy}
@@ -154,28 +154,26 @@ export const RegModal = () => {
                             </HStack>
                             <Text textAlign='right'>т-банк, <Link target="_blank" color='lobotomia.500'
                                                                   textDecoration='underline'
-                                                                  href='https://vk.com/sovavocado'>бовыкина даша</Link></Text>
+                                                                  href='https://vk.com/sovavocado'>бовыкина дарья</Link></Text>
 
-                            <Box p={2}>
 
                             <FormControl isRequired>
-                                <FormLabel>Чек об оплате</FormLabel>
+                                <FormLabel>чек об оплате</FormLabel>
 
                                 <Dropzone  onDrop={onDropCheck}/>
                             </FormControl>
-                            </Box>
 
 
 
                         <FormControl isRequired>
-                                <FormLabel>Расписка</FormLabel>
+                                <FormLabel>расписка</FormLabel>
 
                             <Dropzone onDrop={onDropDocs}/>
 
                             </FormControl>
 
 
-                            <Flex justifyContent='space-between'>
+                            <Flex justifyContent='space-between' gap={2} flexWrap='wrap'>
                                 <Link target="_blank" color='lobotomia.500'
                                       textDecoration='underline' href='https://docs.google.com/document/d/11dBfPsiZemfQxoJTc0p6JcnE-fp7z3p7/edit'>
                                     несовершеннолетние
