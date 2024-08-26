@@ -114,7 +114,7 @@ export const RegModal = () => {
 
 
     return <>
-        <Button w='full'  onClick={onOpen} variant={`solid`} colorScheme={`zhgut`} isDisabled={!isAuthorized}>{isAuthorized ? 'регистрация' : 'войди, чтобы зарегаться'} </Button>
+        <Button w='full'  onClick={onOpen} variant={`solid`} colorScheme={`zhgut`} isDisabled={!isAuthorized}>{isAuthorized ? 'регистрация' : 'войди в вк, чтобы зарегаться'} </Button>
         <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay/>
             <ModalContent>
