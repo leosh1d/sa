@@ -18,8 +18,6 @@ import {ChangeEventHandler, FormEventHandler, useCallback, useState} from "react
 import useWindowSize from 'react-use/lib/useWindowSize'
 import { useClipboard } from '@chakra-ui/react'
 
-import {useDropzone} from 'react-dropzone'
-
 import Confetti from 'react-confetti';
 import {Dropzone} from "@/components/dropzone";
 import {getCurrentUser} from "@/components/auth/getCurrentUser";
