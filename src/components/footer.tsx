@@ -1,8 +1,8 @@
-"use client"
+import {Link, Text, VStack} from "@chakra-ui/react";
 
-import {Stack, Text, Link} from '@chakra-ui/react'
 export const Footer = ()=> {
-    return <Stack  w={`full`}>
-        <Text fontSize={'3rem'} fontWeight={`bold`} color={'#14FFF1'}>Copyright SABI Disigned by <Link href={'https://t.me/kruzhovv'} textDecoration={`underline`}>@kruzhovv</Link>, created by <Link href={'https://t.me/leosh1d'} textDecoration={`underline`}>@leosh1d</Link></Text>
-    </Stack>;
-}
+    return <VStack>
+    <Text w='full' textAlign='center'>made by <Link textDecoration='underline' target='_blank' href='t.me/leosh1d'>@leosh1d</Link> & <Link target='_blank' textDecoration='underline' href='t.me/kruzhovv'>@kruzhovv</Link></Text>
+        <Text w='full' textAlign='center'>copyright студактив)</Text>
+
+    </VStack> }

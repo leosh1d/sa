@@ -1,8 +1,9 @@
 'use client'
-import {VStack, Box} from "@chakra-ui/react";
+import {VStack, Box, Card,Text} from "@chakra-ui/react";
 import {EventCardFull} from "@/components/events/eventCard";
 import {useRef} from "react";
-import Script from "next/script";
+import ChakraCarousel from "@/components/carousel/carousel";
+import {CoordCard} from "@/components/coordCard";
 
 export default function Home() {
 
@@ -14,18 +15,25 @@ export default function Home() {
                            description={'студактив бизнес-информатики готовит первокурсникам выезд в пансионат на выходные, состоящий из командного тематического квеста, розыгрыша призов, дискотеки и секретной части, о которой вы узнаете только на самом мероприятии'}
                            href={'/posvyat'}/>
 
-            <Box ref={ref}/>
-            <Script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="posvyat2024/3"
-                    onReady={() => {
-                        const elem = document.getElementById('telegram-post-posvyat2024-3')
-                        if (!ref?.current || !elem) {
-                            return
-                        }
+            <ChakraCarousel gap={48}>
+               <CoordCard name='сластионов никита' img='/ns.jpeg' description='руководитель студактива бизнес-информатики' tgLink='slastionov'/>
+                <CoordCard name='воробьев кирилл' img='/vk.jpeg' description={`главный координатор посвят'а 2024, заместитель руководителя студактива бизнес-информатики`} tgLink='jknfeel'/>
+                <CoordCard name='рыжов кирилл' img='/rk.jpeg' description='Глава SMM и медиа отдела' tgLink='kruzhovv'/>
 
-                        ref?.current && elem && ref.current.appendChild(elem);
-                        const elemDoc = (elem as HTMLIFrameElement).contentDocument
-                        elemDoc && (elemDoc.body.style.background = '#F3F5FF')
-                    }}/>
+            </ChakraCarousel>
+
+            {/*<Box ref={ref}/>*/}
+            {/*<Script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="posvyat2024/3"*/}
+            {/*        onReady={() => {*/}
+            {/*            const elem = document.getElementById('telegram-post-posvyat2024-3')*/}
+            {/*            if (!ref?.current || !elem) {*/}
+            {/*                return*/}
+            {/*            }*/}
+
+            {/*            ref?.current && elem && ref.current.appendChild(elem);*/}
+            {/*            const elemDoc = (elem as HTMLIFrameElement).contentDocument*/}
+            {/*            elemDoc && (elemDoc.body.style.background = '#F3F5FF')*/}
+            {/*        }}/>*/}
 
         </VStack>
     );
