@@ -5,7 +5,7 @@ import {UserIcon} from "@/components/header/userIcon";
 import {Link} from '@chakra-ui/next-js'
 
 export const Header = () => {
-    return <Flex justifyContent="space-between" alignItems="center" py={4}>
+    return <Flex justifyContent="space-between" alignItems="center" py={4} gap={5}>
         <Link href="/">
             <Logo boxSize={24}/>
         </Link>

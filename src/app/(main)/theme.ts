@@ -1,8 +1,5 @@
-import { extendTheme, defineStyle, createMultiStyleConfigHelpers } from '@chakra-ui/react'
-import { avatarAnatomy } from '@chakra-ui/anatomy'
-
-const { definePartsStyle, defineMultiStyleConfig } =
-    createMultiStyleConfigHelpers(avatarAnatomy.keys)
+import { extendTheme, defineStyle } from '@chakra-ui/react'
+import {inputTheme} from "@/components/theme/inputStyles";
 
 const headingFlex = defineStyle({
     fontVariationSettings: `"wdth" 137, "wght" 650, "GRAD" -200, "XOPQ" 122, "XTRA" 533, "YOPQ" 79, "YTAS" 709, "YTDE" -203, "YTFI" 560, "YTLC" 416, "YTUC" 712, "opsz" 48`,
@@ -77,9 +74,9 @@ const theme = extendTheme({
             baseStyle: {
                 borderRadius: '16px',
                 fontVariationSettings: `"wdth" 116, "wght" 400, "GRAD" 49, "XOPQ" 87, "XTRA" 522, "YOPQ" 95, "YTAS" 750, "YTDE" -203, "YTFI" 560, "YTLC" 501, "YTUC" 738,  "opsz" 16`,
-            }
-
-        }
+            },
+        },
+        Input: inputTheme,
     }
 })
 

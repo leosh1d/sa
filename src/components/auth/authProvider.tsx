@@ -6,7 +6,6 @@ import {VkIdProvider} from "@/components/auth/vkIdProvider";
 import {checkToken} from "@/components/auth/checkToken";
 import {getUserDataFromVk} from "@/components/auth/getUserDataFromVk";
 
-
 export const AuthProvider: FC<WrapperProps> = ({children}) => {
     const isAuthorized = useCommonState((state)=> state.isAuthorized)
     const setIsAuthorized = useCommonState((state)=> state.setIsAuthorized)
