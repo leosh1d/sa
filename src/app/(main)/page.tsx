@@ -7,7 +7,7 @@ import {PromoSection} from "@/components/promoSection";
 export default function Home() {
   return (
       <VStack w='full'>
-        <EventCard active eventType={'posvyat'} title={'посвят 24'} description={'есть над чем задуматься: акционеры крупнейших компаний, инициированные исключительно синтетически, преданы социально-демократической анафеме.'} href={'/posvyat'}/>
+        <EventCard active eventType={'posvyat'} title={'посвят 24'} description={'студактив готовит первокурсникам выезд в пансионат на выходные, состоящий из командного тематического квеста, розыгрыша призов, дискотеки и секретной части'} href={'/posvyat'}/>
           <PromoSection/>
         <EventCarousel/>
       </VStack>

@@ -20,7 +20,7 @@ export async function POST(request: Request) {
 
 
     const spreadsheetId = process.env.SHEETS_TABLE_ID;
-    const range = 'рега перваши!A:H';
+    const range = 'рега перваши!A:L';
 
     const formData = await request.formData()
 
@@ -28,6 +28,8 @@ export async function POST(request: Request) {
     const social = formData.get('social')
 
     const living = formData.get('living')
+
+    const token = formData.get('token')
     const docs = formData.get(`docs`) as File
 
     const docsMetadata = {
@@ -97,14 +99,13 @@ export async function POST(request: Request) {
 
     // Get the public URL
     const publicCheckUrl = `https://drive.google.com/file/d/${checkFileId}/view`;
-    console.log(publicCheckUrl)
     try {
-        await sheets.spreadsheets.values.append({
+        const appendResponse =  await sheets.spreadsheets.values.append({
             spreadsheetId,
             range,
-            valueInputOption: 'RAW',
+            valueInputOption: 'USER_ENTERED',
             requestBody: {
-                values: [[new Date().toLocaleString("ru-RU", {timeZone: "Europe/Moscow"}), fio, social, '', living, '', '', publicCheckUrl, publicDocsUrl]],
+                values: [[new Date().toLocaleString("ru-RU", {timeZone: "Europe/Moscow"}), fio, social, '', '', living, '', publicCheckUrl, publicDocsUrl, 'false', 'false',token]],
             },
         });
 

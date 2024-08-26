@@ -11,6 +11,7 @@ interface purchasedEvent {
 }
 export interface User {
     access_token: string;
+    user_id: string;
     events: purchasedEvent[]
 }
 
