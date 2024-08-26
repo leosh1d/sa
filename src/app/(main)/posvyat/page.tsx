@@ -18,9 +18,7 @@ export default function Home() {
                 <CoordCard name='сластионов никита' img='/ns.jpeg' description='руководитель студактива бизнес-информатики' tgLink='slastionov'/>
                 <CoordCard name='воробьев кирилл' img='/vk.jpeg' description='главный координатор посвята 2024' tgLink='jknfeel'/>
                 <CoordCard name='софия маслова' img='/sm.jpeg' description='глава программы посвята' tgLink='sofams'/>
-
                 <CoordCard name='рыжов кирилл' img='/rk.jpeg' description='глава SMM и медиа отдела' tgLink='kruzhovv'/>
-
             </Stack>
 
             {/*<Box ref={ref}/>*/}

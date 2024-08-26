@@ -22,6 +22,7 @@ import Confetti from 'react-confetti';
 import {Dropzone} from "@/components/dropzone";
 import {getCurrentUser} from "@/components/auth/getCurrentUser";
 import {useCommonState} from "@/state/common/commonState";
+import {docs} from "googleapis/build/src/apis/docs";
 
 export const RegModal = () => {
     const {isOpen, onOpen, onClose} = useDisclosure()
@@ -53,7 +54,7 @@ export const RegModal = () => {
         e.preventDefault();
         setIsLoading.on()
 
-        if(!docsFile || !checkFile){
+        if(!checkFile){
             toast({
                 title: "ошибка!",
                 status: 'error',
@@ -69,8 +70,8 @@ export const RegModal = () => {
         const user = await getCurrentUser()
 
         const formData = new FormData()
-        formData.append("check", docsFile)
-        formData.append("docs", checkFile)
+        formData.append("check", checkFile)
+        formData.append("docs", docsFile || "")
 
         formData.append("fio", formState.fio)
         formData.append("social", formState.social)
@@ -170,8 +171,8 @@ export const RegModal = () => {
 
 
 
-                        <FormControl isRequired>
-                                <FormLabel>расписка</FormLabel>
+                        <FormControl>
+                                <FormLabel>прикрепи расписку или отдай кураторам</FormLabel>
 
                             <Dropzone onDrop={onDropDocs}/>
 

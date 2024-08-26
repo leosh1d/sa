@@ -63,8 +63,11 @@ export const EventCardFull: FC<EventCardProps> = ({eventType, title, description
         <Flex direction='column' gap={2} maxW={96}>
             <Heading>{title}</Heading>
             <Text>{description}</Text>
-            <Text>где: деревня осоргино улица махмуда эсамбаева, 1, осоргино
-                когда: 14 сентября в 12:00 — 15 сентября в 12:00</Text>
+            <Text>где: деревня осоргино, улица махмуда эсамбаева, 1, осоргино
+                </Text>
+            <Text>
+                когда: 14 сентября в 12:00 — 15 сентября в 12:00
+            </Text>
             <Link target="_blank" color='lobotomia.500'
                   textDecoration='underline' href='https://vk.com/albums-222216836'>посмотреть посвят прошлого года</Link>
             <RegModal/>

@@ -28,12 +28,14 @@ export async function POST(request: Request) {
     const social = formData.get('social')
 
     const living = formData.get('living')
-    const phone = formData.get('living')
+    const phone = formData.get('phone')
 
 
     const token = formData.get('token')
     const docs = formData.get(`docs`) as File
 
+    let publicDocsUrl = ''
+    if(docs){
     const docsMetadata = {
         'name': docs.name,
     };
@@ -43,7 +45,7 @@ export async function POST(request: Request) {
         body: toNodeReadable(docs.stream()),
     };
 
-    const response = await drive.files.create({
+        const response = await drive.files.create({
         requestBody: docsMetadata,
         media: docsMedia,
         fields: 'id',
@@ -64,50 +66,51 @@ export async function POST(request: Request) {
         }
     });
 
+
+    publicDocsUrl = `https://drive.google.com/file/d/${fileId}/view`;
+}
     // Get the public URL
-    const publicDocsUrl = `https://drive.google.com/file/d/${fileId}/view`;
-    console.log(publicDocsUrl)
     const check = formData.get(`check`) as File
+        const checkMetadata = {
+            'name': check.name,
+        };
 
-    const checkMetadata = {
-        'name': check.name,
-    };
+        const checkMedia = {
+            mimeType: 'application/octet-stream',
+            body: toNodeReadable(check.stream()),
+        };
 
-    const checkMedia = {
-        mimeType: 'application/octet-stream',
-        body: toNodeReadable(check.stream()),
-    };
+        const responseCheck = await drive.files.create({
+            requestBody: checkMetadata,
+            media: checkMedia,
+            fields: 'id',
+        });
 
-    const responseCheck = await drive.files.create({
-        requestBody: checkMetadata,
-        media: checkMedia,
-        fields: 'id',
-    });
+        const checkFileId = responseCheck.data.id;
 
-    const checkFileId = responseCheck.data.id;
-
-    if (!checkFileId ) {
-        return NextResponse.json({message: `File cant load`}, {status: 400});
-    }
-
-    // Make the file public
-    await drive.permissions.create({
-        fileId: checkFileId,
-        requestBody: {
-            role: 'reader',
-            type: 'anyone'
+        if (!checkFileId) {
+            return NextResponse.json({message: `File cant load`}, {status: 400});
         }
-    });
 
-    // Get the public URL
-    const publicCheckUrl = `https://drive.google.com/file/d/${checkFileId}/view`;
+        // Make the file public
+        await drive.permissions.create({
+            fileId: checkFileId,
+            requestBody: {
+                role: 'reader',
+                type: 'anyone'
+            }
+        });
+
+        // Get the public URL
+       const publicCheckUrl = `https://drive.google.com/file/d/${checkFileId}/view`;
+
     try {
         const appendResponse =  await sheets.spreadsheets.values.append({
             spreadsheetId,
             range,
             valueInputOption: 'USER_ENTERED',
             requestBody: {
-                values: [[new Date().toLocaleString("ru-RU", {timeZone: "Europe/Moscow"}), fio, social, phone, '', living, '', publicCheckUrl, publicDocsUrl, 'false', 'false',token]],
+                values: [[new Date().toLocaleString("ru-RU", {timeZone: "Europe/Moscow"}), fio, social, phone, '', living, '', publicDocsUrl, publicCheckUrl, 'false', 'false', token]],
             },
         });
 
