@@ -11,7 +11,7 @@ interface CoordCardProps {
 export const CoordCard:FC<CoordCardProps> = ({img, description, name, tgLink})=> {
     return <Card borderRadius='24px' overflow='hidden' color='zhgut.500'>
 
-        <Image src={img} alt={name}/>
+        <Image src={img} alt={name}  objectFit='cover'/>
         <CardBody p={4}>
             <Flex direction='column' justifyContent='space-between' h='full' gap={4}>
 
@@ -25,7 +25,7 @@ export const CoordCard:FC<CoordCardProps> = ({img, description, name, tgLink})=>
                 </Box>
 
 
-            <Link target='_blank' textDecoration='underline' color='lobotomia.500' href={`t.me/${tgLink}`}>
+            <Link target='_blank' textDecoration='underline' color='lobotomia.500' href={`https://t.me/${tgLink}`}>
             @{tgLink}
         </Link>
             </Flex>

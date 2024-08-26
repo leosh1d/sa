@@ -1,5 +1,5 @@
 'use client'
-import {VStack, Box, Card,Text} from "@chakra-ui/react";
+import {VStack, Box, Card,Text, Stack} from "@chakra-ui/react";
 import {EventCardFull} from "@/components/events/eventCard";
 import {useRef} from "react";
 import ChakraCarousel from "@/components/carousel/carousel";
@@ -15,12 +15,12 @@ export default function Home() {
                            description={'студактив бизнес-информатики готовит первокурсникам выезд в пансионат на выходные, состоящий из командного тематического квеста, розыгрыша призов, дискотеки и секретной части, о которой вы узнаете только на самом мероприятии'}
                            href={'/posvyat'}/>
 
-            <ChakraCarousel gap={48}>
-               <CoordCard name='сластионов никита' img='/ns.jpeg' description='руководитель студактива бизнес-информатики' tgLink='slastionov'/>
+            <Stack spacing={4} direction={{base: 'column', md: 'row'}}>
+                <CoordCard name='сластионов никита' img='/ns.jpeg' description='руководитель студактива бизнес-информатики' tgLink='slastionov'/>
                 <CoordCard name='воробьев кирилл' img='/vk.jpeg' description={`главный координатор посвят'а 2024, заместитель руководителя студактива бизнес-информатики`} tgLink='jknfeel'/>
                 <CoordCard name='рыжов кирилл' img='/rk.jpeg' description='Глава SMM и медиа отдела' tgLink='kruzhovv'/>
 
-            </ChakraCarousel>
+            </Stack>
 
             {/*<Box ref={ref}/>*/}
             {/*<Script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="posvyat2024/3"*/}
