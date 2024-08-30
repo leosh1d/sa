@@ -44,7 +44,10 @@ const theme = extendTheme({
                 "900": "#33000F"
         },
         'scumbria': `#B7C2D9`,
-        'fentanylLight': '#F7F8FF'
+        'fentanylLight': '#F7F8FF',
+        'gnoy': "#68BA70",
+        'gnoyLight': "#C9E8CC",
+        'emocha': "#E0BA33"
     },
     fonts: {
         heading: 'var(--font-robotoFlex)',

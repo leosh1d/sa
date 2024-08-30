@@ -1,7 +1,7 @@
 'use client'
 import {Heading, Stack, Text, Box, Flex, VStack, Divider} from "@chakra-ui/react";
 import {motion} from "framer-motion";
-import {RollupPattern} from "@/components/rollupPattern";
+import {RollupPattern} from "@/components/patterns/rollupPattern";
 import {SocialMediaLink} from "@/components/socialMediaLink";
 import {Inst} from "@/assets/icons/inst";
 import {Tg} from "@/assets/icons/tg";

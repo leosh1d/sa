@@ -1,6 +1,6 @@
 import {Box, Container, Flex, Heading, Text, VStack} from "@chakra-ui/react";
 import {motion} from "framer-motion";
-import {RollupPattern} from "@/components/rollupPattern";
+import {RollupPattern} from "@/components/patterns/rollupPattern";
 
 export const PromoSection = () =>
     <VStack overflow={'hidden'} position='relative' w={'full'}>

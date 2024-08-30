@@ -2,7 +2,6 @@
 
 import {NextResponse} from "next/server";
 import {google} from "googleapis";
-import * as fs from "node:fs";
 import {toNodeReadable} from "@/utils/toNodeReadable";
 
 export async function POST(request: Request) {
@@ -29,7 +28,6 @@ export async function POST(request: Request) {
 
     const living = formData.get('living')
     const phone = formData.get('phone')
-
 
     const token = formData.get('token')
     const docs = formData.get(`docs`) as File
