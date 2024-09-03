@@ -9,5 +9,5 @@ export const getCurrentUserId = async () => {
         return null
     }
 
-    return userId
+    return `user:${userId}`
 }

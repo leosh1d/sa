@@ -19,6 +19,7 @@ export default function AccountPage() {
 
     const action = async () => {
         const regi = await getRegi()
+        console.warn(regi)
         setState({isLoading: false, value: regi})
     }
     useEffect(() => {
