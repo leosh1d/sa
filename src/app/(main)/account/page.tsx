@@ -19,7 +19,6 @@ export default function AccountPage() {
 
     const action = async () => {
         const regi = await getRegi()
-        console.warn(regi)
         setState({isLoading: false, value: regi})
     }
     useEffect(() => {
@@ -29,17 +28,17 @@ export default function AccountPage() {
 
     return (
         <VStack w={`full`}>
-            {!state.isLoading && state.value?.length && state.value.length === 0 && <>
-                <Text>пока нет оплаченных проходок </Text>
-                <Link href={'/'}>
-                    <Button colorScheme='zhgut'>вернуться на главную</Button>
-                </Link>
-            </>
-            }
             <Box p={2}>
                 {state.isLoading ? <Skeleton>
                     <RegaCard date='' type='posvyat' checkIsConfirmed={false} docsIsConfirmed={false}/>
-                </Skeleton> : state.value.map((item) => <RegaCard key={item.date} {...item}/>)}
+                </Skeleton> : <>
+                    {state.value.length === 0 ? <>
+                        <Text>пока нет оплаченных проходок </Text>
+                        <Link href={'/'}>
+                            <Button colorScheme='zhgut'>вернуться на главную</Button>
+                        </Link>
+                    </> : state.value.map((item) => <RegaCard key={item.date} {...item}/>)}
+                </>}
             </Box>
 
         </VStack>
