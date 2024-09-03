@@ -28,7 +28,7 @@ export default function AccountPage() {
 
     return (
         <VStack w={`full`}>
-            {!state.isLoading && state.value.length === 0 && <>
+            {!state.isLoading && state.value?.length && state.value.length === 0 && <>
                 <Text>пока нет оплаченных проходок </Text>
                 <Link href={'/'}>
                     <Button colorScheme='zhgut'>вернуться на главную</Button>

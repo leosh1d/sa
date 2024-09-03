@@ -35,6 +35,10 @@ export async function getRegi():Promise<Rega[]> {
 
     const user = await getCurrentUser();
 
+    if(!user){
+        return []
+    }
+
     const user_id = user?.user_id
 
     const values = response.data?.values
@@ -47,8 +51,6 @@ export async function getRegi():Promise<Rega[]> {
     if(rega.length === 0){
         return []
     }
-
-    console.warn(rega[9], rega[10])
 
     const checkIsConfirmed = rega[9] === "TRUE";
     const docsIsConfirmed = rega[10] === "TRUE"
