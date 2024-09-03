@@ -108,7 +108,7 @@ export async function POST(request: Request) {
             range,
             valueInputOption: 'USER_ENTERED',
             requestBody: {
-                values: [[new Date().toLocaleString("ru-RU", {timeZone: "Europe/Moscow"}), fio, social, phone, '', living, '', publicDocsUrl, publicCheckUrl, 'false', 'false', token]],
+                values: [[new Date().toLocaleString("ru-RU", {timeZone: "Europe/Moscow"}), fio, social, `'${phone}`, '', living, '', publicDocsUrl, publicCheckUrl, 'false', 'false', token]],
             },
         });
 
