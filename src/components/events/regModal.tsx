@@ -23,6 +23,7 @@ import {Dropzone} from "@/components/dropzone";
 import {getCurrentUser} from "@/components/auth/getCurrentUser";
 import {useCommonState} from "@/state/common/commonState";
 import {docs} from "googleapis/build/src/apis/docs";
+import {getCurrentUserId} from "@/components/auth/getUserId";
 
 export const RegModal = () => {
     const {isOpen, onOpen, onClose} = useDisclosure()
@@ -67,7 +68,7 @@ export const RegModal = () => {
             return
         }
 
-        const user = await getCurrentUser()
+        const user_id = await getCurrentUserId()
 
         const formData = new FormData()
         formData.append("check", checkFile)
@@ -78,7 +79,7 @@ export const RegModal = () => {
         formData.append("phone", formState.phone)
         formData.append("group", formState.group)
         formData.append("living", formState.living)
-        formData.append("token", user ? user.user_id: formState.fio)
+        formData.append("token", user_id ? user_id: formState.fio)
 
         const response = await fetch('/api/event-reg', {
             method: 'POST',

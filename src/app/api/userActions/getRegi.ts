@@ -2,6 +2,7 @@
 import {google} from "googleapis";
 import {getCurrentUser} from "@/components/auth/getCurrentUser";
 import {eventType} from "@/consts/events";
+import {getCurrentUserId} from "@/components/auth/getUserId";
 
 
 export interface Rega {
@@ -33,13 +34,11 @@ export async function getRegi():Promise<Rega[]> {
         range: range as string,
     });
 
-    const user = await getCurrentUser();
+    const user_id = await getCurrentUserId();
 
-    if(!user){
+    if(!user_id){
         return []
     }
-
-    const user_id = user?.user_id
 
     const values = response.data?.values
     if(!user_id || !values){
