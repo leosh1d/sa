@@ -16,7 +16,9 @@ export const AuthProvider: FC<WrapperProps> = ({children}) => {
         const checkTokenAction = async () => {
             const isValidToken = await checkToken()
             const isUserId = await getCurrentUserId()
-            setIsAuthorized(isValidToken && isUserId !== null)
+            const isAuth = isValidToken && isUserId !== null
+
+            setIsAuthorized(isAuth)
         }
         checkTokenAction()
     }, [setIsAuthorized, getCurrentUserId]);

@@ -6,6 +6,8 @@ import {FC, useEffect} from "react";
 import {useCommonState} from "@/state/common/commonState";
 import {useSearchParams, useRouter} from "next/navigation";
 import {actionAfterExchangeCode} from "@/components/auth/actionAfterExchangeCode";
+import {getRefreshToken} from "@/components/auth/getRefreshToken";
+import {getDeviceId, setDeviceIdInCookie} from "@/components/auth/setDeviceIdInCookie";
 
 
 const initVKID = () => VKID.Config.init({
@@ -18,7 +20,7 @@ const initVKID = () => VKID.Config.init({
 })
 
 export const VkIdProvider: FC<WrapperProps> = ({children}) => {
-    const {vkIdConfig: stateVkIdConfig, setVkIdConfig, setIsAuthorized} = useCommonState()
+    const {vkIdConfig: stateVkIdConfig, setVkIdConfig, setIsAuthorized, isAuthorized} = useCommonState()
     const router = useRouter()
 
     useEffect(() => {
@@ -35,6 +37,7 @@ export const VkIdProvider: FC<WrapperProps> = ({children}) => {
     useEffect(() => {
         if(code && deviceId){
             VKID.Auth.exchangeCode(code, deviceId).then((r) => {
+                setDeviceIdInCookie(deviceId)
                 actionAfterExchangeCode(r).then(()=> {
                     setIsAuthorized(true)
                     router.push('/posvyat')
@@ -42,6 +45,23 @@ export const VkIdProvider: FC<WrapperProps> = ({children}) => {
             })
         }
     }, [router, code, deviceId, setIsAuthorized]);
+
+
+    const refreshToken = async ()=> {
+        const refreshToken = await getRefreshToken()
+        const deviceId = await getDeviceId()
+
+        const result = await VKID.Auth.refreshToken(refreshToken, deviceId);
+        actionAfterExchangeCode(result).then(()=> {
+            setIsAuthorized(true)
+        })
+    }
+
+    useEffect(() => {
+        if(!isAuthorized){
+            refreshToken()
+        }
+    }, [isAuthorized, refreshToken, setIsAuthorized]);
 
 
     return <>{children}</>

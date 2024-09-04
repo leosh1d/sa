@@ -115,7 +115,7 @@ export const RegModal = () => {
 
 
     return <>
-        <Button w='full'  onClick={onOpen} variant={`solid`} colorScheme={`zhgut`} >{isAuthorized ? 'регистрация' : 'войди в вк, чтобы зарегаться'} </Button>
+        <Button w='full'  onClick={onOpen} variant={`solid`} colorScheme={`zhgut`} isDisabled={!isAuthorized} >{isAuthorized ? 'регистрация' : 'войди в вк, чтобы зарегаться'} </Button>
         <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay/>
             <ModalContent>
@@ -156,7 +156,7 @@ export const RegModal = () => {
                             <HStack>
                                 <Input readOnly value='2200 2806 7037 1378'/>
                                 <Button colorScheme='zhgut' px={12} onClick={onCopy}
-                                        isDisabled={hasCopied}>{hasCopied ? 'Скопировано' : 'Скопировать'}</Button>
+                                    isDisabled={hasCopied}>{hasCopied ? 'Скопировано' : 'Скопировать'}</Button>
                             </HStack>
                             <Text textAlign='right'>мтс банк, <Link target="_blank" color='lobotomia.500'
                                                                   textDecoration='underline'
