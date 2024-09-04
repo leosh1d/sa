@@ -37,10 +37,11 @@ export const VkIdProvider: FC<WrapperProps> = ({children}) => {
     useEffect(() => {
         if(code && deviceId){
             VKID.Auth.exchangeCode(code, deviceId).then((r) => {
-                setDeviceIdInCookie(deviceId)
                 actionAfterExchangeCode(r).then(()=> {
                     setIsAuthorized(true)
                     router.push('/posvyat')
+                }).then(()=> {
+                    setDeviceIdInCookie(deviceId)
                 })
             })
         }
