@@ -4,7 +4,7 @@ import {baseDomain} from "@/consts/app";
 import {WrapperProps} from "@/types/base";
 import {FC, useEffect} from "react";
 import {useCommonState} from "@/state/common/commonState";
-import {useSearchParams} from "next/navigation";
+import {useSearchParams, useRouter} from "next/navigation";
 import {actionAfterExchangeCode} from "@/components/auth/actionAfterExchangeCode";
 
 
@@ -19,6 +19,8 @@ const initVKID = () => VKID.Config.init({
 
 export const VkIdProvider: FC<WrapperProps> = ({children}) => {
     const {vkIdConfig: stateVkIdConfig, setVkIdConfig, setIsAuthorized} = useCommonState()
+    const router = useRouter()
+
     useEffect(() => {
         if (stateVkIdConfig === undefined) {
             const config = initVKID()
@@ -35,10 +37,11 @@ export const VkIdProvider: FC<WrapperProps> = ({children}) => {
             VKID.Auth.exchangeCode(code, deviceId).then((r) => {
                 actionAfterExchangeCode(r).then(()=> {
                     setIsAuthorized(true)
+                    router.push('/posvyat')
                 })
             })
         }
-    }, [code, deviceId, setIsAuthorized]);
+    }, [router, code, deviceId, setIsAuthorized]);
 
 
     return <>{children}</>
