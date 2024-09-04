@@ -7,7 +7,8 @@ import {useCommonState} from "@/state/common/commonState";
 import {useSearchParams, useRouter} from "next/navigation";
 import {actionAfterExchangeCode} from "@/components/auth/actionAfterExchangeCode";
 import {getRefreshToken} from "@/components/auth/getRefreshToken";
-import {getDeviceId, setDeviceIdInCookie} from "@/components/auth/setDeviceIdInCookie";
+import {setDeviceIdInCookie} from "@/components/auth/setDeviceIdInCookie";
+import {getDeviceId} from "@/components/auth/getDeviceId";
 
 
 const initVKID = () => VKID.Config.init({
@@ -40,11 +41,13 @@ export const VkIdProvider: FC<WrapperProps> = ({children}) => {
                 actionAfterExchangeCode(r).then(()=> {
                     setIsAuthorized(true)
                     router.push('/posvyat')
-                }).then(()=> {
-                    setDeviceIdInCookie(deviceId)
                 })
             })
+
+            setDeviceIdInCookie(deviceId)
         }
+
+
     }, [router, code, deviceId, setIsAuthorized]);
 
 

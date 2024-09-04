@@ -7,8 +7,3 @@ export const setDeviceIdInCookie = async (deviceId: string) => {
     return null
 }
 
-export const getDeviceId = async ()=> {
-
-    return cookies().get(`deviceId`)?.value || ""
-
-}
