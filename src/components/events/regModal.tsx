@@ -31,6 +31,7 @@ export const RegModal = () => {
     const { width, height } = useWindowSize()
 
     const { onCopy, hasCopied } = useClipboard('2200280670371378')
+    const { onCopy:onCopyPhone, hasCopied:hasCopiedPhone } = useClipboard('+79107751282')
 
 
     // const name = useCommonState((state)=> state.name)
@@ -114,7 +115,7 @@ export const RegModal = () => {
 
 
     return <>
-        <Button w='full'  onClick={onOpen} variant={`solid`} colorScheme={`zhgut`} isDisabled={!isAuthorized}>{isAuthorized ? 'регистрация' : 'войди в вк, чтобы зарегаться'} </Button>
+        <Button w='full'  onClick={onOpen} variant={`solid`} colorScheme={`zhgut`} >{isAuthorized ? 'регистрация' : 'войди в вк, чтобы зарегаться'} </Button>
         <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay/>
             <ModalContent>
@@ -161,11 +162,17 @@ export const RegModal = () => {
                                                                   textDecoration='underline'
                                                                   href='https://vk.com/sovavocado'>никита сластионов</Link></Text>
 
+                            <Text>номер телефона (для сбп)</Text>
+                            <HStack>
+                                <Input readOnly value='+7 (910) 775-12-82'/>
+                                <Button colorScheme='zhgut' px={12} onClick={onCopyPhone}
+                                        isDisabled={hasCopiedPhone}>{hasCopiedPhone ? 'Скопировано' : 'Скопировать'}</Button>
+                            </HStack>
 
                             <FormControl isRequired>
                                 <FormLabel>чек об оплате</FormLabel>
 
-                                <Dropzone  onDrop={onDropCheck}/>
+                                <Dropzone onDrop={onDropCheck}/>
                             </FormControl>
 
 
