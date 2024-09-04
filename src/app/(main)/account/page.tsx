@@ -41,6 +41,12 @@ export default function AccountPage() {
                 </>}
             </Box>
 
+            {/*{isAuthorized && <Button onClick={async () => {*/}
+            {/*    await logout()*/}
+            {/*}*/}
+
+            {/*}>выйти из аккаунта</Button>}*/}
+
         </VStack>
     )
 

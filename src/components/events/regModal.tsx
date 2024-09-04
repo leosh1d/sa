@@ -22,6 +22,7 @@ import Confetti from 'react-confetti';
 import {Dropzone} from "@/components/dropzone";
 import {useCommonState} from "@/state/common/commonState";
 import {getCurrentUserId} from "@/components/auth/getUserId";
+import {setUserId} from "@/components/auth/setUserId";
 
 export const RegModal = () => {
     const {isOpen, onOpen, onClose} = useDisclosure()
@@ -80,6 +81,10 @@ export const RegModal = () => {
         formData.append("living", formState.living)
         formData.append("token", user_id ? user_id: formState.fio)
 
+        if(user_id === undefined){
+            await setUserId(formState.fio)
+        }
+
         const response = await fetch('/api/event-reg', {
             method: 'POST',
             body: formData
@@ -111,11 +116,9 @@ export const RegModal = () => {
             setShowConfetti.off()
         }, 3000)
     }
-    const isAuthorized = useCommonState((state)=> state.isAuthorized)
-
 
     return <>
-        <Button w='full'  onClick={onOpen} variant={`solid`} colorScheme={`zhgut`} isDisabled={!isAuthorized} >{isAuthorized ? 'регистрация' : 'войди в вк, чтобы зарегаться'} </Button>
+        <Button w='full' onClick={onOpen} variant={`solid`} colorScheme={`zhgut`}>регистрация</Button>
         <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay/>
             <ModalContent>
