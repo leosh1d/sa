@@ -20,9 +20,7 @@ import { useClipboard } from '@chakra-ui/react'
 
 import Confetti from 'react-confetti';
 import {Dropzone} from "@/components/dropzone";
-import {getCurrentUser} from "@/components/auth/getCurrentUser";
 import {useCommonState} from "@/state/common/commonState";
-import {docs} from "googleapis/build/src/apis/docs";
 import {getCurrentUserId} from "@/components/auth/getUserId";
 
 export const RegModal = () => {
@@ -32,7 +30,7 @@ export const RegModal = () => {
     const [showConfetti, setShowConfetti] = useBoolean(false)
     const { width, height } = useWindowSize()
 
-    const { onCopy, hasCopied } = useClipboard('2200700446964883')
+    const { onCopy, hasCopied } = useClipboard('2200280670371378')
 
 
     // const name = useCommonState((state)=> state.name)
@@ -155,13 +153,13 @@ export const RegModal = () => {
 
                             <Text>необходимо оплатить 4400₽</Text>
                             <HStack>
-                                <Input readOnly value='2200700446964883'/>
+                                <Input readOnly value='2200 2806 7037 1378'/>
                                 <Button colorScheme='zhgut' px={12} onClick={onCopy}
                                         isDisabled={hasCopied}>{hasCopied ? 'Скопировано' : 'Скопировать'}</Button>
                             </HStack>
-                            <Text textAlign='right'>т-банк, <Link target="_blank" color='lobotomia.500'
+                            <Text textAlign='right'>мтс банк, <Link target="_blank" color='lobotomia.500'
                                                                   textDecoration='underline'
-                                                                  href='https://vk.com/sovavocado'>бовыкина дарья</Link></Text>
+                                                                  href='https://vk.com/sovavocado'>никита сластионов</Link></Text>
 
 
                             <FormControl isRequired>
