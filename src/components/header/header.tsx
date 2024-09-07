@@ -1,7 +1,6 @@
 "use client"
-import {Flex} from "@chakra-ui/react";
+import {Flex, Text} from "@chakra-ui/react";
 import {Logo} from "@/components/logo";
-import {UserIcon} from "@/components/header/userIcon";
 import {Link} from '@chakra-ui/next-js'
 
 export const Header = () => {
@@ -10,6 +9,10 @@ export const Header = () => {
             <Logo boxSize={24}/>
         </Link>
 
-        <UserIcon/>
+        <Link href={'/account'}>
+            <Text>проходки</Text>
+        </Link>
+
+        {/*<UserIcon/>*/}
     </Flex>
 }

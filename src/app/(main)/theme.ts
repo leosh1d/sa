@@ -12,6 +12,22 @@ const d1 = defineStyle({
     }
 )
 
+const buttonOutlineStyle = defineStyle({
+    background: 'transparent',
+    border: '1px solid',
+    color: 'zhgut.500',
+    "_active": {
+        border: '3px solid',
+        background: 'transparent',
+        color: 'zhgut.500',
+        fontWeight: '700'
+    },
+    "_focus": {
+        background: 'zhgut.500',
+        color: 'white'
+    }
+})
+
 
 const theme = extendTheme({
     config: {
@@ -74,6 +90,9 @@ const theme = extendTheme({
             }
         },
         Button: {
+            variants: {
+                outline: buttonOutlineStyle
+            },
             baseStyle: {
                 borderRadius: '16px',
                 fontVariationSettings: `"wdth" 116, "wght" 400, "GRAD" 49, "XOPQ" 87, "XTRA" 522, "YOPQ" 95, "YTAS" 750, "YTDE" -203, "YTFI" 560, "YTLC" 501, "YTUC" 738,  "opsz" 16`,

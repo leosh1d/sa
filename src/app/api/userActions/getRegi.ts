@@ -1,8 +1,6 @@
 'use server'
 import {google} from "googleapis";
-import {getCurrentUser} from "@/components/auth/getCurrentUser";
 import {eventType} from "@/consts/events";
-import {getCurrentUserId} from "@/components/auth/getUserId";
 
 
 export interface Rega {
@@ -13,7 +11,7 @@ export interface Rega {
 }
 
 
-export async function getRegi():Promise<Rega[]> {
+export async function getRegi(fio: string):Promise<Rega[]> {
 
     const auth = new google.auth.GoogleAuth({
         credentials: {
@@ -34,18 +32,15 @@ export async function getRegi():Promise<Rega[]> {
         range: range as string,
     });
 
-    const user_id = await getCurrentUserId();
-
-    if(!user_id){
-        return []
-    }
-
     const values = response.data?.values
-    if(!user_id || !values){
-        return []
+
+    if(!values) {
+        return [];
     }
 
-    const rega:string[] = values.find((item)=> item[11] === user_id) || [];
+
+    const lowerFio = fio.toLowerCase()
+    const rega:string[] = values.find((item)=> item[1].toLowerCase() === lowerFio) || [];
 
     if(rega.length === 0){
         return []
