@@ -131,6 +131,10 @@ export const RegModal = () => {
                             {/*    <FormLabel>номер телефона</FormLabel>*/}
                             {/*    <Input name='phone' onChange={handleInputChange}/>*/}
                             {/*</FormControl>*/}
+                            <FormControl isRequired>
+                                <FormLabel>ссылка на вк/тг</FormLabel>
+                                <Input name='social' onChange={handleInputChange}/>
+                            </FormControl>
 
                             <FormControl isRequired>
                                 <FormLabel>телефон</FormLabel>
