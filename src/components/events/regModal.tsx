@@ -20,9 +20,7 @@ import { useClipboard } from '@chakra-ui/react'
 
 import Confetti from 'react-confetti';
 import {Dropzone} from "@/components/dropzone";
-import {useCommonState} from "@/state/common/commonState";
-import {getCurrentUserId} from "@/components/auth/getUserId";
-import {setUserId} from "@/components/auth/setUserId";
+
 
 export const RegModal = () => {
     const {isOpen, onOpen, onClose} = useDisclosure()
@@ -31,7 +29,7 @@ export const RegModal = () => {
     const [showConfetti, setShowConfetti] = useBoolean(false)
     const { width, height } = useWindowSize()
 
-    const { onCopy, hasCopied } = useClipboard('2200280670371378')
+    const { onCopy, hasCopied } = useClipboard('4377727800362357')
     const { onCopy:onCopyPhone, hasCopied:hasCopiedPhone } = useClipboard('+79107751282')
 
 
@@ -68,8 +66,6 @@ export const RegModal = () => {
             return
         }
 
-        const user_id = await getCurrentUserId()
-
         const formData = new FormData()
         formData.append("check", checkFile)
         formData.append("docs", docsFile || "")
@@ -79,11 +75,7 @@ export const RegModal = () => {
         formData.append("phone", formState.phone)
         formData.append("group", formState.group)
         formData.append("living", formState.living)
-        formData.append("token", user_id ? user_id: formState.fio)
-
-        if(user_id === undefined){
-            await setUserId(formState.fio)
-        }
+        formData.append("token", formState.fio)
 
         const response = await fetch('/api/event-reg', {
             method: 'POST',
@@ -141,11 +133,6 @@ export const RegModal = () => {
                             {/*</FormControl>*/}
 
                             <FormControl isRequired>
-                                <FormLabel>ссылка на вк/тг</FormLabel>
-                                <Input name='social' onChange={handleInputChange}/>
-                            </FormControl>
-
-                            <FormControl isRequired>
                                 <FormLabel>телефон</FormLabel>
                                 <Input name='phone' onChange={handleInputChange}/>
                             </FormControl>
@@ -157,11 +144,11 @@ export const RegModal = () => {
 
                             <Text>необходимо оплатить 4400₽</Text>
                             <HStack>
-                                <Input readOnly value='2200 2806 7037 1378'/>
+                                <Input readOnly value='4377 7278 0036 2357'/>
                                 <Button colorScheme='zhgut' px={12} onClick={onCopy}
                                     isDisabled={hasCopied}>{hasCopied ? 'Скопировано' : 'Скопировать'}</Button>
                             </HStack>
-                            <Text textAlign='right'>мтс банк, <Link target="_blank" color='lobotomia.500'
+                            <Text textAlign='right'>т-банк, <Link target="_blank" color='lobotomia.500'
                                                                   textDecoration='underline'
                                                                   href='https://vk.com/sovavocado'>никита сластионов</Link></Text>
 
