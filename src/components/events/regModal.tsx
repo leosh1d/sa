@@ -146,7 +146,7 @@ export const RegModal = () => {
                                 <Input name='living' onChange={handleInputChange}/>
                             </FormControl>
 
-                            <Text>необходимо оплатить 4400₽</Text>
+                            <Text>необходимо оплатить 4900₽</Text>
                             <HStack>
                                 <Input readOnly value='4377 7278 0036 2357'/>
                                 <Button colorScheme='zhgut' px={12} onClick={onCopy}
