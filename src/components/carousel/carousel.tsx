@@ -7,7 +7,7 @@ import React, {
     useState,
     useMemo,
     useRef,
-    ReactNode
+    ReactNode, ForwardRefExoticComponent
 } from "react";
 
 import {
@@ -17,7 +17,7 @@ import {
     VStack,
     Button,
     Flex,
-    Box
+    Box, FlexProps
 } from "@chakra-ui/react";
 
 import {motion, useAnimation, useMotionValue, AnimationControls, PanInfo} from "framer-motion";
@@ -27,7 +27,7 @@ import percentage from "@/utils/percentage";
 import {ChevronRight} from "@/assets/icons/ChevronRight";
 
 
-const MotionFlex = motion(Flex);
+const MotionFlex = motion(Flex as ForwardRefExoticComponent<FlexProps>);
 
 const transitionProps = {
     stiffness: 400,
