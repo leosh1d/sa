@@ -12,20 +12,18 @@ interface VKGalleryProps {
 export const VKGallery: React.FC<VKGalleryProps> = ({albumId}) => {
     const [photos, setPhotos] = useState<string[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
 
     const isAuthorized = useCommonState((state) => state.isAuthorized)
 
     useEffect(() => {
         const loadPhotos = async () => {
             setLoading(true);
-            setError(null);
             try {
                 const photoUrls = await fetchPhotos(albumId);
                 console.warn(photoUrls)
                 setPhotos(photoUrls);
             } catch (err) {
-                setError('Не удалось загрузить фотографии');
+                console.warn(err)
             } finally {
                 setLoading(false);
             }

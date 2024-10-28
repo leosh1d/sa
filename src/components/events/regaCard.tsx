@@ -1,27 +1,10 @@
 import {Box, Flex, Heading, Text, VStack, HStack} from '@chakra-ui/react'
 import {Rega} from "@/app/api/userActions/getRegi";
-import {eventType} from "@/consts/events";
 import {FC} from "react";
 import {Clock} from "@/assets/icons/clock";
 import {Check} from "@/assets/icons/check";
 import {PosvyatPattern} from "@/components/patterns/posvyatPattern";
 
-interface RegaImageProps {
-    type: eventType
-}
-
-export const RegaImage = ({type}: RegaImageProps) => {
-    switch (type) {
-        case "posvyat":
-            return <></>
-        case "gya":
-            return <></>
-        case "povishay":
-            return <></>
-        default:
-            return <></>
-    }
-}
 
 interface RegaStatusProps {
     type: 'check' | 'docs',
@@ -48,7 +31,7 @@ const RegaStatus: FC<RegaStatusProps> = ({type, value}) => {
     </HStack>
 }
 
-export const RegaCard: FC<Rega> = ({docsIsConfirmed, checkIsConfirmed, type, date}) => {
+export const RegaCard: FC<Rega> = ({docsIsConfirmed, checkIsConfirmed, date}) => {
     return <Box maxW={80} >
         <Text>{date.split(',')[0]}</Text>
         <Box background='white'  borderRadius='24px'>

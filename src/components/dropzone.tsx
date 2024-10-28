@@ -4,7 +4,6 @@ import {
     Box,
     Text,
     useColorModeValue,
-    Icon,
     Stack,
 } from '@chakra-ui/react';
 
@@ -26,13 +25,8 @@ export const Dropzone: React.FC<DropzoneProps> = ({ onDrop }) => {
         getInputProps,
         acceptedFiles,
         isDragActive,
-        isDragAccept,
         isDragReject,
     } = useDropzone({ onDrop: onDropAccepted });
-
-    const activeBg = useColorModeValue('gray.100', 'gray.600');
-    const acceptBg = useColorModeValue('green.100', 'green.600');
-    const rejectBg = useColorModeValue('red.100', 'red.600');
 
     let dropText = 'выбери файл';
 

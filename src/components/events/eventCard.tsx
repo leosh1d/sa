@@ -4,9 +4,6 @@ import {eventType} from "@/consts/events";
 import {Button, Flex, Heading, Link, Text} from "@chakra-ui/react";
 import {EventIcon} from "./eventIcon";
 import {Markdown} from "@/components/markdown";
-import {RegModal} from "@/components/events/regModal";
-import {useCommonState} from "@/state/common/commonState";
-import {VKGallery} from "@/components/vkGallery/vkGallery";
 
 interface EventCardProps {
     eventType: eventType
@@ -35,7 +32,7 @@ export const EventCard: FC<EventCardProps> = ({eventType, title, description, hr
     </Flex>
 }
 
-export const EventCardSmall: FC<EventCardProps> = ({eventType, title, description, href, active}) => {
+export const EventCardSmall: FC<EventCardProps> = ({eventType, title, description, href}) => {
     return <Flex background='fentanylLight' gap={4} alignItems={`center`} direction={'column'} p={6}
                  boxShadow={'0px 0px 10px 0px rgba(0, 0, 0, 0.07)'}
                  borderRadius={32}>

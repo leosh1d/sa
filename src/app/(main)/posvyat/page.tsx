@@ -1,12 +1,9 @@
 'use client'
-import {VStack, Box, Card, Text, Stack, Container, Button} from "@chakra-ui/react";
+import {VStack, Text, Container} from "@chakra-ui/react";
 import {EventCardFull} from "@/components/events/eventCard";
-import {useRef} from "react";
-import {CoordCard} from "@/components/coordCard";
 import {VKGallery} from "@/components/vkGallery/vkGallery";
 
 export default function Posvyat() {
-
 
     return (
             <VStack w='full' pb={24} spacing={4}>

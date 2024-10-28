@@ -28,10 +28,9 @@ export async function fetchPhotos(albumId: string): Promise<string[]> {
     const albumParsedId = albumId.split("_")[1];
 
     const allPhotoUrls: string[] = [];
-    let offset = 0;
     const count = 100; // Максимальное количество фотографий за один запрос
 
-    while (true) {
+    for (let offset = 0; ; offset += count) {
         const response = await fetch(
             `https://api.vk.com/method/photos.get?owner_id=${ownerId}&album_id=${albumParsedId}&access_token=${token}&v=5.131&offset=${offset}&count=${count}`
         );
@@ -50,9 +49,6 @@ export async function fetchPhotos(albumId: string): Promise<string[]> {
 
         // Если вернулось меньше фото, чем `count`, значит, достигли конца альбома
         if (data.response.items.length < count) break;
-
-        // Увеличиваем `offset` на количество загруженных фото
-        offset += count;
     }
 
     return allPhotoUrls;

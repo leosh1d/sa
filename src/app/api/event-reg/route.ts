@@ -103,14 +103,14 @@ export async function POST(request: Request) {
        const publicCheckUrl = `https://drive.google.com/file/d/${checkFileId}/view`;
 
     try {
-        const appendResponse =  await sheets.spreadsheets.values.append({
-            spreadsheetId,
-            range,
-            valueInputOption: 'USER_ENTERED',
-            requestBody: {
-                values: [[new Date().toLocaleString("ru-RU", {timeZone: "Europe/Moscow"}), fio, social, `'${phone}`, '', living, '', publicDocsUrl, publicCheckUrl, 'false', 'false', token]],
-            },
-        });
+        // const appendResponse =  await sheets.spreadsheets.values.append({
+        //     spreadsheetId,
+        //     range,
+        //     valueInputOption: 'USER_ENTERED',
+        //     requestBody: {
+        //         values: [[new Date().toLocaleString("ru-RU", {timeZone: "Europe/Moscow"}), fio, social, `'${phone}`, '', living, '', publicDocsUrl, publicCheckUrl, 'false', 'false', token]],
+        //     },
+        // });
 
         return NextResponse.json({message: 'Data added successfully'}, {status: 200});
     } catch (error) {

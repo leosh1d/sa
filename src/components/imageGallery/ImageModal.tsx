@@ -1,5 +1,5 @@
-import {AspectRatio, Box, IconButton} from '@chakra-ui/react';
-import {motion} from 'framer-motion';
+import {Box, IconButton} from '@chakra-ui/react';
+import {motion, PanInfo} from 'framer-motion';
 import {CloseIcon} from '@chakra-ui/icons';
 import {FC, useState} from 'react';
 import {ChevronLeft} from "@/assets/icons/ChevronLeft";
@@ -59,7 +59,7 @@ export const ImageModal: FC<ImageModalProps> = ({
                 onClick={(e) => e.stopPropagation()}
                 drag="x" // Включаем перетаскивание по оси x
                 dragElastic={{left: 0.8, right: 0.8, top: 0.1, bottom: 0.1}} // Небольшая "упругость" для лучшего UX
-                onDragEnd={(e, {offset, velocity}) => {
+                onDragEnd={(e: MouseEvent | TouchEvent | PointerEvent, {offset, velocity}: PanInfo) => {
                     const swipe = Math.abs(offset.x) * velocity.x;
 
                     if (swipe > 1000) {
@@ -76,13 +76,13 @@ export const ImageModal: FC<ImageModalProps> = ({
                 overflow='hidden'
                 position={'relative'}
             >
-                    <Image
-                        src={images[selectedIndex]}
-                        alt={`full-image-${selectedIndex}`}
-                        fill
-                        objectFit='cover'
-                        style={{pointerEvents: 'none'}}
-                    />
+                <Image
+                    src={images[selectedIndex]}
+                    alt={`full-image-${selectedIndex}`}
+                    fill
+                    objectFit='cover'
+                    style={{pointerEvents: 'none'}}
+                />
             </Box>
             <IconButton
                 aria-label="Previous Image"

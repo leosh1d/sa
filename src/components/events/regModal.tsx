@@ -23,7 +23,7 @@ import {Dropzone} from "@/components/dropzone";
 
 
 export const RegModal = () => {
-    const {isOpen, onOpen, onClose} = useDisclosure()
+    const {isOpen, onClose} = useDisclosure()
     const {isOpen: isOpenSuccess, onOpen: onOpenSuccess, onClose: onCloseSuccess} = useDisclosure()
 
     const [showConfetti, setShowConfetti] = useBoolean(false)
@@ -77,10 +77,10 @@ export const RegModal = () => {
         formData.append("living", formState.living)
         formData.append("token", formState.fio)
 
-        const response = await fetch('/api/event-reg', {
-            method: 'POST',
-            body: formData
-        });
+        // const response = await fetch('/api/event-reg', {
+        //     method: 'POST',
+        //     body: formData
+        // });
 
         setIsLoading.off()
         onClose()

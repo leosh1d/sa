@@ -1,11 +1,11 @@
 import { useState, useCallback, useLayoutEffect, RefCallback } from "react";
 
 // Define a type for the debounce function's callback
-type Callback = (...args: any[]) => void;
+type Callback = (...args: unknown[]) => void;
 
 const debounce = (limit: number, callback: Callback): Callback => {
     let timeoutId: NodeJS.Timeout | undefined;
-    return (...args: any[]) => {
+    return (...args: unknown[]) => {
         if (timeoutId) {
             clearTimeout(timeoutId);
         }
