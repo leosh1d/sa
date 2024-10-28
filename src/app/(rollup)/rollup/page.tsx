@@ -9,7 +9,7 @@ import {Vk} from "@/assets/icons/vk";
 
 
 export default function Rollup() {
-    const pidoriIzKupertino = navigator.userAgent.match(/AppleWebKit/) && !navigator.userAgent.match(/Chrome/)
+    const pidoriIzKupertino = typeof navigator !== 'undefined' && navigator.userAgent.match(/AppleWebKit/) && !navigator.userAgent.match(/Chrome/)
 
     return (
         <>
