@@ -5,6 +5,8 @@ import {Link} from "@chakra-ui/next-js";
 import {ChangeEventHandler, useState} from "react";
 import {getRegi, Rega} from "@/app/api/userActions/getRegi";
 import {RegaCard} from "@/components/events/regaCard";
+import {logout} from "@/components/auth/logout";
+import {useCommonState} from "@/state/common/commonState";
 
 type RegiState = {
     isLoading: boolean,
@@ -31,6 +33,8 @@ export default function AccountPage() {
         const regi = await getRegi(inputText)
         setState({isLoading: false, value: regi, searched: true})
     }
+
+    const isAuthorized = useCommonState((state) => state.isAuthorized)
 
     return (
         <VStack w={`full`}>
@@ -62,11 +66,11 @@ export default function AccountPage() {
                 </>}
             </Box>
 
-            {/*{isAuthorized && <Button onClick={async () => {*/}
-            {/*    await logout()*/}
-            {/*}*/}
+            {isAuthorized && <Button onClick={async () => {
+                await logout()
+            }
 
-            {/*}>выйти из аккаунта</Button>}*/}
+            }>выйти из аккаунта</Button>}
 
         </VStack>
     )

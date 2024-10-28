@@ -1,12 +1,26 @@
 'use client'
 
 import * as VKID from "@vkid/sdk";
-import {getAccessToken} from "@/components/auth/getAccessToken";
 import {getUserData} from "@/components/auth/actions/getUserData";
+import {useCommonState} from "@/state/common/commonState";
 
-export const getUserDataFromVk = async(callback:(info: VKID.UserInfoResult) => void) => {
-    const token = await getAccessToken()
-    const data2 = await getUserData()
-    const info = await VKID.Auth.userInfo(token)
-    callback(info)
+export const getUserDataFromVk = async (callback: (info: VKID.UserInfoResult) => void) => {
+    // const token = await getAccessToken()
+    const setIsAuthorized = useCommonState.getState().setIsAuthorized;
+
+    const data = await getUserData()
+    if (data.error) {
+        console.error(data.error)
+        setIsAuthorized(false)
+    } else {
+        callback({
+            user: {
+                avatar: data.response.photo_200,
+                first_name: data.response.first_name,
+                last_name: data.response.last_name,
+                phone: data.response.phone,
+            }
+        })
+    }
+
 }

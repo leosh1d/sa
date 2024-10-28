@@ -2,7 +2,6 @@
 
 import {TokenResult} from "@vkid/sdk";
 import {cookies} from "next/headers";
-import {addUser, getUserById, updateUser, User} from "@/app/api/userActions/userActions";
 
 export const actionAfterExchangeCode = async (r: Omit<TokenResult, 'id_token'>)=> {
     cookies().set(`access_token`, r.access_token)

@@ -10,7 +10,5 @@ export const getUserData = async ()=> {
     }).toString(), {
         method: "POST"
     })
-    const data = await res.json()
-    console.log(token, data)
-    return data
+    return await res.json()
 }

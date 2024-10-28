@@ -4,8 +4,12 @@ import {baseDomain} from "@/consts/app";
 import {WrapperProps} from "@/types/base";
 import {FC, useEffect} from "react";
 import {useCommonState} from "@/state/common/commonState";
-import {useSearchParams, useRouter} from "next/navigation";
 import {actionAfterExchangeCode} from "@/components/auth/actionAfterExchangeCode";
+import {getRefreshToken} from "@/components/auth/getRefreshToken";
+import {getDeviceId} from "@/components/auth/getDeviceId";
+import {deleteRefreshToken} from "@/components/auth/deleteRefreshToken";
+import {checkToken} from "@/components/auth/checkToken";
+import {getUserId} from "@/components/auth/getUserId";
 
 
 const initVKID = () => VKID.Config.init({
@@ -19,7 +23,6 @@ const initVKID = () => VKID.Config.init({
 
 export const VkIdProvider: FC<WrapperProps> = ({children}) => {
     const {vkIdConfig: stateVkIdConfig, setVkIdConfig, setIsAuthorized, isAuthorized} = useCommonState()
-    const router = useRouter()
 
     useEffect(() => {
         if (stateVkIdConfig === undefined) {
@@ -28,37 +31,41 @@ export const VkIdProvider: FC<WrapperProps> = ({children}) => {
         }
     }, [setVkIdConfig, stateVkIdConfig]);
 
-    const params = useSearchParams()
-    const code = params.get(`code`)
-    const deviceId = params.get(`device_id`)
 
     useEffect(() => {
-        if(code && deviceId){
-            VKID.Auth.exchangeCode(code, deviceId).then((r) => {
-                actionAfterExchangeCode(r).then(()=> {
-                    setIsAuthorized(true)
-                    router.push('/posvyat')
-                })
-            })
+        const refreshTokenAction = async () => {
+            const refreshToken = await getRefreshToken()
+            const deviceId = await getDeviceId()
 
-            // setDeviceIdInCookie(deviceId)
+            if (refreshToken) {
+                try {
+                    const result = await VKID.Auth.refreshToken(refreshToken, deviceId);
+                    actionAfterExchangeCode(result).then(() => {
+                        setIsAuthorized(true)
+                    })
+                } catch (err) {
+                    console.error(err)
+                    deleteRefreshToken()
+                }
+            }
         }
 
+        if (!isAuthorized) {
+            refreshTokenAction()
+        }
 
-    }, [router, code, deviceId, setIsAuthorized]);
+    }, [isAuthorized, setIsAuthorized]);
 
+    useEffect(() => {
+        const checkTokenAction = async () => {
+            const isValidToken = await checkToken()
+            const isUserId = await getUserId()
+            const isAuth = isValidToken && isUserId !== null
 
-    // const refreshToken = async ()=> {
-    //     const refreshToken = await getRefreshToken()
-    //     const deviceId = await getDeviceId()
-    //
-    //     const result = await VKID.Auth.refreshToken(refreshToken, deviceId);
-    //     actionAfterExchangeCode(result).then(()=> {
-    //         setIsAuthorized(true)
-    //     })
-    // }
-
-
+            setIsAuthorized(isAuth)
+        }
+        checkTokenAction()
+    }, [setIsAuthorized]);
 
     return <>{children}</>
 }
