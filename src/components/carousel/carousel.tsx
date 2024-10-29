@@ -27,7 +27,7 @@ import percentage from "@/utils/percentage";
 import {ChevronRight} from "@/assets/icons/ChevronRight";
 
 
-const MotionFlex = motion(Flex as ForwardRefExoticComponent<FlexProps>);
+const MotionFlex = motion(Flex);
 
 const transitionProps = {
     stiffness: 400,
