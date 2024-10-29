@@ -14,15 +14,18 @@ export default function SuccessPage() {
     const router = useRouter()
 
     useEffect(() => {
-        if (code && deviceId && code!="") {
+        if (code && deviceId && code != "") {
+            try {
             VKID.Auth.exchangeCode(code, deviceId).then((r) => {
                 actionAfterExchangeCode(r).then(() => {
                     setIsAuthorized(true)
                     router.push('/')
                 })
             })
-
             setDeviceIdInCookie(deviceId)
+            } catch(error){
+                console.error('ошибка авторизации:', error)
+            }
         }
 
 
