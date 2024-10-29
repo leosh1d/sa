@@ -16,7 +16,7 @@ const initVKID = (domain: string) => VKID.Config.init({
     app: Number(process.env.NEXT_PUBLIC_VKID_APP_ID), // Идентификатор приложения.
     redirectUrl: domain, // Адрес для перехода после авторизации.
     state: self.crypto.randomUUID(),
-    scope: 'email phone vkid.personal_info', // Список прав доступа, которые нужны приложению.
+    scope: 'email phone vkid.personal_info offline', // Список прав доступа, которые нужны приложению.
     mode: VKID.ConfigAuthMode.Redirect, // По умолчанию авторизация открывается в новой вкладке.
 })
 
