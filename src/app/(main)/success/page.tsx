@@ -6,16 +6,18 @@ import {actionAfterExchangeCode} from "@/components/auth/actionAfterExchangeCode
 import {setDeviceIdInCookie} from "@/components/auth/setDeviceIdInCookie";
 import {useCommonState} from "@/state/common/commonState";
 
+// export const fetchCache = 'force-no-store'
+
 export default function SuccessPage() {
     const params = useSearchParams()
     const code = params.get(`code`)
     const deviceId = params.get(`device_id`)
     const setIsAuthorized = useCommonState((state) => state.setIsAuthorized)
     const router = useRouter()
+    const isAuthorized = useCommonState((state) => state.isAuthorized)
 
     useEffect(() => {
-        if (code && deviceId && code != "") {
-            try {
+        if (code && deviceId && code != "" && !isAuthorized) {
             VKID.Auth.exchangeCode(code, deviceId).then((r) => {
                 actionAfterExchangeCode(r).then(() => {
                     setIsAuthorized(true)
@@ -23,14 +25,10 @@ export default function SuccessPage() {
                 })
             })
             setDeviceIdInCookie(deviceId)
-            } catch(error){
-                console.error('ошибка авторизации:', error)
-            }
         }
 
+    }, [router, code, deviceId, setIsAuthorized, isAuthorized]);
 
-    }, [router, code, deviceId, setIsAuthorized]);
-
-
-    return null;
+    return <></>;
 }
+

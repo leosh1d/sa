@@ -16,19 +16,18 @@ const initVKID = (domain:string) => VKID.Config.init({
     app: Number(process.env.NEXT_PUBLIC_VKID_APP_ID), // Идентификатор приложения.
     redirectUrl: domain, // Адрес для перехода после авторизации.
     state: 'studaktivbistudaktivbistudaktivbi',
-    codeVerifier: 'studaktivbi24studaktivbi24studaktivbi24', // Верификатор в виде случайной строки. Обеспечивает защиту передаваемых данных.
     scope: 'email phone vkid.personal_info', // Список прав доступа, которые нужны приложению.
-    mode: VKID.ConfigAuthMode.InNewTab, // По умолчанию авторизация открывается в новой вкладке.
+    mode: VKID.ConfigAuthMode.Redirect, // По умолчанию авторизация открывается в новой вкладке.
+    __vkidDomain: 'studaktivbi.ru/api/proxy'
 })
 
 export const VkIdProvider: FC<WrapperProps> = ({children}) => {
-    const {vkIdConfig: stateVkIdConfig, setVkIdConfig, setIsAuthorized, isAuthorized} = useCommonState()
+    const {vkIdConfig: stateVkIdConfig, setVkIdConfig, setIsAuthorized} = useCommonState()
 
     useEffect(() => {
         if (stateVkIdConfig === undefined) {
-            const baseDomain = process.env.NODE_ENV === "development" ? baseDomainDev : baseDomainProd;
-            console.warn(baseDomain)
-            const config = initVKID(baseDomain)
+            // const baseDomain = process.env.NODE_ENV === "development" ? baseDomainDev : baseDomainProd;
+            const config = initVKID(baseDomainDev)
             setVkIdConfig(config)
         }
     }, [setVkIdConfig, stateVkIdConfig]);
@@ -52,7 +51,7 @@ export const VkIdProvider: FC<WrapperProps> = ({children}) => {
                         })
                     } catch (err) {
                         console.error(err)
-                        deleteRefreshToken()
+                        await deleteRefreshToken()
                     }
                 }
             }
