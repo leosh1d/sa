@@ -19,7 +19,7 @@ export const Gallery: FC<GalleryProps> = ({images, loading}) => {
                 <Box aspectRatio={1} key={index} as={motion.div} layoutId={`image-${src}`}
                      onClick={() => setSelectedIndex(index)} cursor="pointer" position='relative'>
                     <ImageWithSkeleton fill={true} src={src} alt={`image-${index}`}
-                           style={{opacity: selectedIndex === index ? 0 : 1, zIndex: -1, objectFit: 'cover'}}
+                           style={{opacity: selectedIndex === index ? 0 : 1, zIndex: -1, objectFit: 'cover', height: '100%'}}
                     />
                 </Box>
             )) : Array(24).fill('').map((_val, index) =>
