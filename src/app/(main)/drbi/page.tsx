@@ -1,7 +1,8 @@
 'use client'
-import {VStack, Container, Text, Button} from "@chakra-ui/react";
+import {VStack, Container, Text} from "@chakra-ui/react";
 import {EventCardFull} from "@/components/events/eventCard";
 import {VKGallery} from "@/components/vkGallery/vkGallery";
+import {RegModal} from "@/components/events/regModal";
 
 export default function Drbi() {
 
@@ -13,7 +14,9 @@ export default function Drbi() {
                         день рождения образовательной программы «бизнес-информатика», на котором студенты и
                         преподаватели проводят совместный досуг, общаются, участвуют в квизах, смотрят на
                         выступления приглашеных гостей'</Text>
-                    <Button disabled colorScheme='zhgut'>регистрация скоро откроется!</Button>
+                    <RegModal/>
+
+                    {/*<Button disabled colorScheme='zhgut'>регистрация скоро откроется!</Button>*/}
                 </EventCardFull>
             </Container>
 

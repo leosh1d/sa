@@ -12,25 +12,26 @@ import {
     Flex,
     Text,
     Box,
-    Link, HStack, useToast
+    Link, useToast, Checkbox
 } from "@chakra-ui/react";
 import {ChangeEventHandler, FormEventHandler, useCallback, useState} from "react";
 import useWindowSize from 'react-use/lib/useWindowSize'
-import { useClipboard } from '@chakra-ui/react'
+// import {useClipboard} from '@chakra-ui/react'
 
 import Confetti from 'react-confetti';
-import {Dropzone} from "@/components/dropzone";
+// import {Dropzone} from "@/components/dropzone";
+import NextLink from "next/link";
 
 
 export const RegModal = () => {
-    const {isOpen, onClose} = useDisclosure()
+    const {isOpen, onClose, onOpen} = useDisclosure()
     const {isOpen: isOpenSuccess, onOpen: onOpenSuccess, onClose: onCloseSuccess} = useDisclosure()
 
     const [showConfetti, setShowConfetti] = useBoolean(false)
-    const { width, height } = useWindowSize()
+    const {width, height} = useWindowSize()
 
-    const { onCopy, hasCopied } = useClipboard('4377727800362357')
-    const { onCopy:onCopyPhone, hasCopied:hasCopiedPhone } = useClipboard('+79107751282')
+    // const {onCopy, hasCopied} = useClipboard('4377727800362357')
+    // const {onCopy: onCopyPhone, hasCopied: hasCopiedPhone} = useClipboard('+79107751282')
 
 
     // const name = useCommonState((state)=> state.name)
@@ -53,7 +54,7 @@ export const RegModal = () => {
         e.preventDefault();
         setIsLoading.on()
 
-        if(!checkFile){
+        if (!checkFile) {
             toast({
                 title: "ошибка!",
                 status: 'error',
@@ -88,11 +89,11 @@ export const RegModal = () => {
         onOpenSuccess()
     };
 
-    const onDropDocs = useCallback((acceptedFiles:File[]) => {
+    const onDropDocs = useCallback((acceptedFiles: File[]) => {
         setDocs(acceptedFiles[0])
     }, [])
 
-    const onDropCheck = useCallback((acceptedFiles:File[]) => {
+    const onDropCheck = useCallback((acceptedFiles: File[]) => {
         setCheckFile(acceptedFiles[0])
     }, [])
 
@@ -110,12 +111,12 @@ export const RegModal = () => {
     }
 
     return <>
-        <Button w='full' isDisabled variant={`solid`} colorScheme={`zhgut`}>рега закрыта</Button>
+        <Button w='full' variant={`solid`} colorScheme={`zhgut`} onClick={onOpen}>зарегистрироваться</Button>
         <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay/>
             <ModalContent>
                 <ModalHeader>
-                    <Heading fontSize='2xl'>рега</Heading>
+                    <Heading fontSize='2xl'>регистрация</Heading>
                 </ModalHeader>
                 <ModalCloseButton/>
                 <ModalBody>
@@ -141,58 +142,61 @@ export const RegModal = () => {
                                 <Input name='phone' onChange={handleInputChange}/>
                             </FormControl>
 
-                            <FormControl>
-                                <FormLabel>с кем бы вы хотели жить</FormLabel>
-                                <Input name='living' onChange={handleInputChange}/>
-                            </FormControl>
+                            {/*<FormControl>*/}
+                            {/*    <FormLabel>с кем бы вы хотели жить</FormLabel>*/}
+                            {/*    <Input name='living' onChange={handleInputChange}/>*/}
+                            {/*</FormControl>*/}
 
-                            <Text>необходимо оплатить 4900₽</Text>
-                            <HStack>
-                                <Input readOnly value='4377 7278 0036 2357'/>
-                                <Button colorScheme='zhgut' px={12} onClick={onCopy}
-                                    isDisabled={hasCopied}>{hasCopied ? 'Скопировано' : 'Скопировать'}</Button>
-                            </HStack>
-                            <Text textAlign='right'>т-банк, <Link target="_blank" color='lobotomia.500'
-                                                                  textDecoration='underline'
-                                                                  href='https://vk.com/sovavocado'>никита сластионов</Link></Text>
+                            {/*<Text>необходимо оплатить 4900₽</Text>*/}
+                            {/*<HStack>*/}
+                            {/*    <Input readOnly value='4377 7278 0036 2357'/>*/}
+                            {/*    <Button colorScheme='zhgut' px={12} onClick={onCopy}*/}
+                            {/*            isDisabled={hasCopied}>{hasCopied ? 'Скопировано' : 'Скопировать'}</Button>*/}
+                            {/*</HStack>*/}
+                            {/*<Text textAlign='right'>т-банк, <Link target="_blank" color='lobotomia.500'*/}
+                            {/*                                      textDecoration='underline'*/}
+                            {/*                                      href='https://vk.com/sovavocado'>никита*/}
+                            {/*    сластионов</Link></Text>*/}
 
-                            <Text>номер телефона (для сбп)</Text>
-                            <HStack>
-                                <Input readOnly value='+7 (910) 775-12-82'/>
-                                <Button colorScheme='zhgut' px={12} onClick={onCopyPhone}
-                                        isDisabled={hasCopiedPhone}>{hasCopiedPhone ? 'Скопировано' : 'Скопировать'}</Button>
-                            </HStack>
+                            {/*<Text>номер телефона (для сбп)</Text>*/}
+                            {/*<HStack>*/}
+                            {/*    <Input readOnly value='+7 (910) 775-12-82'/>*/}
+                            {/*    <Button colorScheme='zhgut' px={12} onClick={onCopyPhone}*/}
+                            {/*            isDisabled={hasCopiedPhone}>{hasCopiedPhone ? 'Скопировано' : 'Скопировать'}</Button>*/}
+                            {/*</HStack>*/}
 
-                            <FormControl isRequired>
-                                <FormLabel>чек об оплате</FormLabel>
+                            {/*<FormControl isRequired>*/}
+                            {/*    <FormLabel>чек об оплате</FormLabel>*/}
 
-                                <Dropzone onDrop={onDropCheck}/>
-                            </FormControl>
-
-
-
-                        <FormControl>
-                                <FormLabel>прикрепи расписку или отдай кураторам</FormLabel>
-
-                            <Dropzone onDrop={onDropDocs}/>
-
-                            </FormControl>
+                            {/*    <Dropzone onDrop={onDropCheck}/>*/}
+                            {/*</FormControl>*/}
 
 
-                            <Flex justifyContent='space-between' gap={2} flexWrap='wrap'>
-                                <Link target="_blank" color='lobotomia.500'
-                                      textDecoration='underline' href='https://docs.google.com/document/d/11dBfPsiZemfQxoJTc0p6JcnE-fp7z3p7/edit'>
-                                    несовершеннолетние
-                                </Link>
-                                <Link target="_blank" color='lobotomia.500'
-                                      textDecoration='underline' href='https://docs.google.com/document/d/1YJAn4LNiZyR-x3G4LLneV7KeGX5_8vap/edit'>
-                                    совершеннолетние
-                                </Link>
-                            </Flex>
+                            {/*<FormControl>*/}
+                            {/*    <FormLabel>прикрепи расписку или отдай кураторам</FormLabel>*/}
 
+                            {/*    <Dropzone onDrop={onDropDocs}/>*/}
+
+                            {/*</FormControl>*/}
+
+
+                            {/*<Flex justifyContent='space-between' gap={2} flexWrap='wrap'>*/}
+                            {/*    <Link target="_blank" color='lobotomia.500'*/}
+                            {/*          textDecoration='underline'*/}
+                            {/*          href='https://docs.google.com/document/d/11dBfPsiZemfQxoJTc0p6JcnE-fp7z3p7/edit'>*/}
+                            {/*        несовершеннолетние*/}
+                            {/*    </Link>*/}
+                            {/*    <Link target="_blank" color='lobotomia.500'*/}
+                            {/*          textDecoration='underline'*/}
+                            {/*          href='https://docs.google.com/document/d/1YJAn4LNiZyR-x3G4LLneV7KeGX5_8vap/edit'>*/}
+                            {/*        совершеннолетние*/}
+                            {/*    </Link>*/}
+                            {/*</Flex>*/}
+                            <Checkbox isRequired colorScheme='zhgut'>соглашаюсь с <Link as={NextLink} href='docs/privacy' textDecoration='underline'>политикой в отношении обработки персональных данных</Link> </Checkbox>
+                            <Checkbox isRequired colorScheme='zhgut' >соглашаюсь с <Link as={NextLink} href='docs/privacy' textDecoration='underline'>обработку персональных данных</Link> </Checkbox>
 
                             <Button isLoading={isLoading} colorScheme='zhgut' type='submit'
-                                    mt={4}>зарегистрироваться</Button>
+                                    mt={4} isDisabled>регистрация скоро откроется!</Button>
                         </Flex>
 
                     </form>
@@ -204,7 +208,7 @@ export const RegModal = () => {
         <Modal isOpen={isOpenSuccess} onClose={onCloseSuccess}>
             <ModalOverlay/>
             <ModalContent>
-            <ModalHeader>
+                <ModalHeader>
                     <Heading fontSize='2xl'>ты зарегался!</Heading>
                 </ModalHeader>
                 <ModalCloseButton/>

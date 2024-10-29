@@ -12,10 +12,10 @@ import {checkToken} from "@/components/auth/checkToken";
 import {getUserId} from "@/components/auth/getUserId";
 
 
-const initVKID = (domain:string) => VKID.Config.init({
+const initVKID = (domain: string) => VKID.Config.init({
     app: Number(process.env.NEXT_PUBLIC_VKID_APP_ID), // Идентификатор приложения.
     redirectUrl: domain, // Адрес для перехода после авторизации.
-    state: 'studaktivbistudaktivbistudaktivbi',
+    state: self.crypto.randomUUID(),
     scope: 'email phone vkid.personal_info', // Список прав доступа, которые нужны приложению.
     mode: VKID.ConfigAuthMode.Redirect, // По умолчанию авторизация открывается в новой вкладке.
 })
@@ -26,10 +26,12 @@ export const VkIdProvider: FC<WrapperProps> = ({children}) => {
     useEffect(() => {
         if (stateVkIdConfig === undefined) {
             const baseDomain = process.env.NODE_ENV === "development" ? baseDomainDev : baseDomainProd;
-            const config = initVKID(baseDomain)
+            const config = initVKID(baseDomainDev)
             setVkIdConfig(config)
         }
     }, [setVkIdConfig, stateVkIdConfig]);
+
+
 
     useEffect(() => {
         const checkTokenAction = async () => {
@@ -58,7 +60,8 @@ export const VkIdProvider: FC<WrapperProps> = ({children}) => {
         checkTokenAction()
     }, [setIsAuthorized]);
 
-    if(stateVkIdConfig === undefined){
+
+    if (stateVkIdConfig === undefined) {
         return null
     }
 

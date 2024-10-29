@@ -15,9 +15,10 @@ export default function SuccessPage() {
     const setIsAuthorized = useCommonState((state) => state.setIsAuthorized)
     const router = useRouter()
     const isAuthorized = useCommonState((state) => state.isAuthorized)
+    const vkIdConfig = useCommonState((state) => state.vkIdConfig)
 
     useEffect(() => {
-        if (code && deviceId && code != "" && !isAuthorized) {
+        if (code && deviceId && code != "" && !isAuthorized && vkIdConfig !== undefined) {
             VKID.Auth.exchangeCode(code, deviceId).then((r) => {
                 actionAfterExchangeCode(r).then(() => {
                     setIsAuthorized(true)
@@ -27,7 +28,7 @@ export default function SuccessPage() {
             setDeviceIdInCookie(deviceId)
         }
 
-    }, [router, code, deviceId, setIsAuthorized, isAuthorized]);
+    }, [router, code, deviceId, setIsAuthorized, isAuthorized, vkIdConfig]);
 
     return <></>;
 }
