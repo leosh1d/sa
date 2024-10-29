@@ -12,7 +12,7 @@ export const getUserData = async ()=> {
     }).toString(), {
         method: "POST"
     })
-    console.warn(res)
+    console.warn(res.json())
     if(!res.ok){
         throw res
     }

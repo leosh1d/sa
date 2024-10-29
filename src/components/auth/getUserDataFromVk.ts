@@ -8,6 +8,7 @@ export const getUserDataFromVk = async (callback: (info: VKID.UserInfoResult) =>
     // const setIsAuthorized = useCommonState.getState().setIsAuthorized;
 
     const data = await getUserData()
+    console.warn(data)
     if (data.error) {
         console.error(data.error)
         // setIsAuthorized(false)
