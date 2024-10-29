@@ -2,18 +2,17 @@
 
 import * as VKID from "@vkid/sdk";
 import {getUserData} from "@/components/auth/actions/getUserData";
-import {useCommonState} from "@/state/common/commonState";
-import {deleteAccessToken} from "@/components/auth/deleteAccessToken";
 
 export const getUserDataFromVk = async (callback: (info: VKID.UserInfoResult) => void) => {
     // const token = await getAccessToken()
-    const setIsAuthorized = useCommonState.getState().setIsAuthorized;
+    // const setIsAuthorized = useCommonState.getState().setIsAuthorized;
 
     const data = await getUserData()
     if (data.error) {
         console.error(data.error)
-        setIsAuthorized(false)
-        deleteAccessToken()
+        // setIsAuthorized(false)
+        // deleteAccessToken()
+        // deleteRefreshToken()
     } else {
         callback({
             user: {
