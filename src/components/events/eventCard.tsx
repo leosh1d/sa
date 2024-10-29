@@ -1,9 +1,10 @@
 "use client"
 import {FC, Fragment, ReactNode} from "react";
 import {eventType} from "@/consts/events";
-import {Button, Flex, Heading, Link, Text} from "@chakra-ui/react";
+import {Button, Flex, Heading, Text} from "@chakra-ui/react";
 import {EventIcon} from "./eventIcon";
 import {Markdown} from "@/components/markdown";
+import Link from 'next/link'
 
 interface EventCardProps {
     eventType: eventType

@@ -13,9 +13,8 @@ export default function SuccessPage() {
     const setIsAuthorized = useCommonState((state) => state.setIsAuthorized)
     const router = useRouter()
 
-
     useEffect(() => {
-        if (code && deviceId) {
+        if (code && deviceId && code!="") {
             VKID.Auth.exchangeCode(code, deviceId).then((r) => {
                 actionAfterExchangeCode(r).then(() => {
                     setIsAuthorized(true)
