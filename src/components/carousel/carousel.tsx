@@ -7,7 +7,7 @@ import React, {
     useState,
     useMemo,
     useRef,
-    ReactNode,
+    ReactNode, ForwardRefExoticComponent
 } from "react";
 
 import {
@@ -17,7 +17,7 @@ import {
     VStack,
     Button,
     Flex,
-    Box,
+    Box, FlexProps
 } from "@chakra-ui/react";
 
 import {motion, useAnimation, useMotionValue, AnimationControls, PanInfo} from "framer-motion";
@@ -27,7 +27,7 @@ import percentage from "@/utils/percentage";
 import {ChevronRight} from "@/assets/icons/ChevronRight";
 
 
-const MotionFlex = motion(Flex);
+const MotionFlex = motion(Flex as ForwardRefExoticComponent<Omit<FlexProps, 'onDragEnd'>>);
 
 const transitionProps = {
     stiffness: 400,
@@ -41,7 +41,7 @@ interface ChakraCarouselProps {
     gap: number
 }
 
-const ChakraCarousel: React.FC<ChakraCarouselProps> = ({ children, gap }) => {
+const ChakraCarousel: React.FC<ChakraCarouselProps> = ({children, gap}) => {
     const [trackIsActive, setTrackIsActive] = useState(false);
     const [multiplier, setMultiplier] = useState(0.35);
     const [sliderWidth, setSliderWidth] = useState(0);
@@ -56,7 +56,7 @@ const ChakraCarousel: React.FC<ChakraCarouselProps> = ({ children, gap }) => {
         [children, itemWidth, gap]
     );
 
-    const { breakpoints } = useTheme();
+    const {breakpoints} = useTheme();
 
     const [isBetweenBaseAndMd] = useMediaQuery(
         `(min-width: ${breakpoints.base}) and (max-width: ${breakpoints.md})`
@@ -157,7 +157,7 @@ const Slider: React.FC<SliderProps> = ({
                                            children,
                                            gap
                                        }) => {
-    const [ref, { width }] = useBoundingRect();
+    const [ref, {width}] = useBoundingRect();
 
     useLayoutEffect(() => initSliderWidth(Math.round(width)), [
         width,
@@ -182,8 +182,8 @@ const Slider: React.FC<SliderProps> = ({
         <>
             <Box
                 ref={ref}
-                w={{ base: "100%", md: `calc(100% + ${gap}px)` }}
-                ml={{ base: 0, md: `-${gap / 2}px` }}
+                w={{base: "100%", md: `calc(100% + ${gap}px)`}}
+                ml={{base: 0, md: `-${gap / 2}px`}}
                 px={`${gap / 2}px`}
                 position="relative"
                 overflow="hidden"
@@ -204,7 +204,7 @@ const Slider: React.FC<SliderProps> = ({
                     variant="link"
                     minW={0}
                 >
-                    <ChevronLeft boxSize={9} />
+                    <ChevronLeft boxSize={9}/>
                 </Button>
 
                 <Progress
@@ -235,7 +235,7 @@ const Slider: React.FC<SliderProps> = ({
                     zIndex={2}
                     minW={0}
                 >
-                    <ChevronRight boxSize={9} />
+                    <ChevronRight boxSize={9}/>
                 </Button>
             </Flex>
         </>
@@ -272,7 +272,7 @@ const Track: React.FC<TrackProps> = ({
 
     const handleDragStart = () => setDragStartPosition(positions[activeItem]);
 
-    const handleDragEnd = (_:MouseEvent, info:PanInfo) => {
+    const handleDragEnd = (_: MouseEvent, info: PanInfo) => {
         const distance = info.offset.x;
         const velocity = info.velocity.x * multiplier;
         const direction = velocity < 0 || distance < 0 ? 1 : -1;
@@ -370,9 +370,9 @@ const Track: React.FC<TrackProps> = ({
                         onDragStart={handleDragStart}
                         onDragEnd={handleDragEnd}
                         animate={controls}
-                        style={{ x }}
+                        style={{x}}
                         drag="x"
-                        _active={{ cursor: "grabbing" }}
+                        _active={{cursor: "grabbing"}}
                         minWidth="min-content"
                         flexWrap="nowrap"
                         cursor="grab"
@@ -387,7 +387,7 @@ const Track: React.FC<TrackProps> = ({
 
 interface ItemProps {
     setTrackIsActive: (isActive: boolean) => void,
-    setActiveItem:  React.Dispatch<React.SetStateAction<number>>,
+    setActiveItem: React.Dispatch<React.SetStateAction<number>>,
     activeItem: number,
     constraint: number,
     itemWidth: number,
