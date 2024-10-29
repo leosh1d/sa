@@ -16,7 +16,7 @@
     "@emotion/styled": "^11.11.5",
     "@fontsource-variable/roboto-flex": "^5.0.15",
     "@vercel/kv": "^2.0.0",
-    "@vkid/sdk": "^2.2.0",
+    "@vkid/sdk": "^2.4.0",
     "framer-motion": "^11.1.7",
     "googleapis": "^142.0.0",
     "markdown-to-jsx": "^7.5.0",

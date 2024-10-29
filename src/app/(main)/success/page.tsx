@@ -19,7 +19,7 @@ export default function SuccessPage() {
             VKID.Auth.exchangeCode(code, deviceId).then((r) => {
                 actionAfterExchangeCode(r).then(() => {
                     setIsAuthorized(true)
-                    router.push('/drbi')
+                    router.push('/')
                 })
             })
 
