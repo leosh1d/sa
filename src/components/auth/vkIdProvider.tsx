@@ -26,7 +26,7 @@ export const VkIdProvider: FC<WrapperProps> = ({children}) => {
     useEffect(() => {
         if (stateVkIdConfig === undefined) {
             const baseDomain = process.env.NODE_ENV === "development" ? baseDomainDev : baseDomainProd;
-            const config = initVKID(baseDomainDev)
+            const config = initVKID(baseDomain)
             setVkIdConfig(config)
         }
     }, [setVkIdConfig, stateVkIdConfig]);
