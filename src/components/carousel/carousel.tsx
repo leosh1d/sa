@@ -7,7 +7,7 @@ import React, {
     useState,
     useMemo,
     useRef,
-    ReactNode, ForwardRefExoticComponent
+    ReactNode,
 } from "react";
 
 import {
@@ -17,7 +17,7 @@ import {
     VStack,
     Button,
     Flex,
-    Box, FlexProps
+    Box,
 } from "@chakra-ui/react";
 
 import {motion, useAnimation, useMotionValue, AnimationControls, PanInfo} from "framer-motion";
