@@ -72,9 +72,9 @@ export default function AccountPage() {
 
             {isAuthorized && <Button onClick={async () => {
                 const token = await getAccessToken()
-                await VKID.Auth.logout(token)
                 await deleteAccessToken()
                 await deleteRefreshToken()
+                token && await VKID.Auth.logout(token)
                 setIsAuthorized(false)
                 router.push('/')
             }

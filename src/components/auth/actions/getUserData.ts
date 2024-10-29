@@ -12,9 +12,6 @@ export const getUserData = async ()=> {
     }).toString(), {
         method: "POST"
     })
-    console.warn(await res.json())
-    if(!res.ok){
-        throw res
-    }
+    console.warn(res)
     return await res.json()
 }
