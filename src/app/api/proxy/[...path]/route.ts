@@ -13,7 +13,7 @@ export async function POST(req: NextRequest, {params}: { params: { path: string[
 async function handleProxy(req: NextRequest, path: string[]) {
     try {
         const queryParams = req.nextUrl.searchParams.toString();
-        const targetUrl = `https://api.example.com/${path.join('/')}${queryParams ? `?${queryParams}` : ''}`;
+        const targetUrl = `https://id.vk.com/${path.join('/')}${queryParams ? `?${queryParams}` : ''}`;
 
         const apiResponse = await fetch(targetUrl, {
             method: req.method,
