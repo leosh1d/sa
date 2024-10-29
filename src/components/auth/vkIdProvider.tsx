@@ -15,7 +15,7 @@ import {getUserId} from "@/components/auth/getUserId";
 const initVKID = (domain: string) => VKID.Config.init({
     app: Number(process.env.NEXT_PUBLIC_VKID_APP_ID), // Идентификатор приложения.
     redirectUrl: domain, // Адрес для перехода после авторизации.
-    state: self.crypto.randomUUID(),
+    state: 'studaktivstudaktiv2112',
     scope: 'email phone vkid.personal_info offline', // Список прав доступа, которые нужны приложению.
     mode: VKID.ConfigAuthMode.Redirect, // По умолчанию авторизация открывается в новой вкладке.
 })
