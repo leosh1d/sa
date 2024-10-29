@@ -15,7 +15,8 @@ import {getUserId} from "@/components/auth/getUserId";
 const initVKID = (domain:string) => VKID.Config.init({
     app: Number(process.env.NEXT_PUBLIC_VKID_APP_ID), // Идентификатор приложения.
     redirectUrl: domain, // Адрес для перехода после авторизации.
-    codeVerifier: 'FGH767Gd65', // Верификатор в виде случайной строки. Обеспечивает защиту передаваемых данных.
+    state: 'studaktivbistudaktivbistudaktivbi',
+    codeVerifier: 'studaktivbi24studaktivbi24studaktivbi24', // Верификатор в виде случайной строки. Обеспечивает защиту передаваемых данных.
     scope: 'email phone vkid.personal_info', // Список прав доступа, которые нужны приложению.
     mode: VKID.ConfigAuthMode.InNewTab, // По умолчанию авторизация открывается в новой вкладке.
 })

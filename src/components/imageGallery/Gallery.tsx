@@ -3,6 +3,7 @@ import {SimpleGrid, Box, Skeleton} from '@chakra-ui/react';
 import {AnimatePresence, motion} from 'framer-motion';
 import {ImageModal} from './ImageModal';
 import Image from 'next/image'
+import ImageWithSkeleton from "@/components/imageGallery/imageWithSkeleton";
 
 interface GalleryProps {
     images: string[];
@@ -17,8 +18,8 @@ export const Gallery: FC<GalleryProps> = ({images, loading}) => {
             {!loading ? images.map((src, index) => (
                 <Box aspectRatio={1} key={index} as={motion.div} layoutId={`image-${src}`}
                      onClick={() => setSelectedIndex(index)} cursor="pointer" position='relative'>
-                    <Image fill={true} src={src} objectFit={'cover'} alt={`image-${index}`}
-                           style={{opacity: selectedIndex === index ? 0 : 1, zIndex: -1}}
+                    <ImageWithSkeleton fill={true} src={src} alt={`image-${index}`}
+                           style={{opacity: selectedIndex === index ? 0 : 1, zIndex: -1, objectFit: 'cover'}}
                     />
                 </Box>
             )) : Array(24).fill('').map((_val, index) =>
