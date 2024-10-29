@@ -193,7 +193,7 @@ export const RegModal = () => {
                             {/*    </Link>*/}
                             {/*</Flex>*/}
                             <Checkbox isRequired colorScheme='zhgut'>соглашаюсь с <Link as={NextLink} href='docs/privacy' textDecoration='underline'>политикой в отношении обработки персональных данных</Link> </Checkbox>
-                            <Checkbox isRequired colorScheme='zhgut' >соглашаюсь с <Link as={NextLink} href='docs/privacy' textDecoration='underline'>обработку персональных данных</Link> </Checkbox>
+                            <Checkbox isRequired colorScheme='zhgut' >соглашаюсь на <Link as={NextLink} href='docs/privacy' textDecoration='underline'>обработку персональных данных</Link> </Checkbox>
 
                             <Button isLoading={isLoading} colorScheme='zhgut' type='submit'
                                     mt={4} isDisabled>регистрация скоро откроется!</Button>
