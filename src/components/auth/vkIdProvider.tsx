@@ -18,7 +18,6 @@ const initVKID = (domain:string) => VKID.Config.init({
     state: 'studaktivbistudaktivbistudaktivbi',
     scope: 'email phone vkid.personal_info', // Список прав доступа, которые нужны приложению.
     mode: VKID.ConfigAuthMode.Redirect, // По умолчанию авторизация открывается в новой вкладке.
-    __vkidDomain: 'studaktivbi.ru/api/proxy'
 })
 
 export const VkIdProvider: FC<WrapperProps> = ({children}) => {
@@ -26,8 +25,8 @@ export const VkIdProvider: FC<WrapperProps> = ({children}) => {
 
     useEffect(() => {
         if (stateVkIdConfig === undefined) {
-            // const baseDomain = process.env.NODE_ENV === "development" ? baseDomainDev : baseDomainProd;
-            const config = initVKID(baseDomainDev)
+            const baseDomain = process.env.NODE_ENV === "development" ? baseDomainDev : baseDomainProd;
+            const config = initVKID(baseDomain)
             setVkIdConfig(config)
         }
     }, [setVkIdConfig, stateVkIdConfig]);
@@ -58,6 +57,10 @@ export const VkIdProvider: FC<WrapperProps> = ({children}) => {
         }
         checkTokenAction()
     }, [setIsAuthorized]);
+
+    if(stateVkIdConfig === undefined){
+        return null
+    }
 
     return <>{children}</>
 }
