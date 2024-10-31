@@ -1,10 +1,9 @@
 'use client'
-import { useRouter, useSearchParams} from 'next/navigation';
+import {useRouter, useSearchParams} from 'next/navigation';
 import {useEffect} from "react";
-import * as VKID from "@vkid/sdk";
-import {actionAfterExchangeCode} from "@/components/auth/actionAfterExchangeCode";
 import {setDeviceIdInCookie} from "@/components/auth/setDeviceIdInCookie";
 import {useCommonState} from "@/state/common/commonState";
+import {exchangeCode} from "@/components/auth/exchangeCode";
 
 // export const fetchCache = 'force-no-store'
 
@@ -19,11 +18,9 @@ export default function SuccessPage() {
 
     useEffect(() => {
         if (code && deviceId && code != "" && !isAuthorized && vkIdConfig !== undefined) {
-            VKID.Auth.exchangeCode(code, deviceId).then((r) => {
-                actionAfterExchangeCode(r).then(() => {
-                    setIsAuthorized(true)
-                    router.push('/')
-                })
+            exchangeCode({configString: JSON.stringify(vkIdConfig.get()), code, deviceId}).then(() => {
+                setIsAuthorized(true)
+                router.push('/')
             })
             setDeviceIdInCookie(deviceId)
         }

@@ -10,15 +10,22 @@ import {getDeviceId} from "@/components/auth/getDeviceId";
 import {deleteRefreshToken} from "@/components/auth/deleteRefreshToken";
 import {checkToken} from "@/components/auth/checkToken";
 import {getUserId} from "@/components/auth/getUserId";
+import {getVerifierAndChallengeCodes} from "@/components/auth/getVerifierAndChallengeCodes";
+import {refreshTokenAction} from "@/components/auth/refreshTokenAction";
 
 
-const initVKID = (domain: string) => VKID.Config.init({
-    app: Number(process.env.NEXT_PUBLIC_VKID_APP_ID), // Идентификатор приложения.
-    redirectUrl: domain, // Адрес для перехода после авторизации.
-    state: 'studaktivstudaktiv2112',
-    scope: 'email phone vkid.personal_info', // Список прав доступа, которые нужны приложению.
-    mode: VKID.ConfigAuthMode.Redirect, // По умолчанию авторизация открывается в новой вкладке.
-})
+const initVKID = async (domain: string) => {
+    const {codeChallenge} = await getVerifierAndChallengeCodes()
+    return VKID.Config.init({
+        app: Number(process.env.NEXT_PUBLIC_VKID_APP_ID), // Идентификатор приложения.
+        redirectUrl: domain, // Адрес для перехода после авторизации.
+        state: 'studaktivstudaktiv2112',
+        scope: 'email phone vkid.personal_info', // Список прав доступа, которые нужны приложению.
+        mode: VKID.ConfigAuthMode.Redirect, // По умолчанию авторизация открывается в новой вкладке.
+        codeChallenge: codeChallenge,
+    })
+}
+
 
 export const VkIdProvider: FC<WrapperProps> = ({children}) => {
     const {vkIdConfig: stateVkIdConfig, setVkIdConfig, setIsAuthorized} = useCommonState()
@@ -26,11 +33,11 @@ export const VkIdProvider: FC<WrapperProps> = ({children}) => {
     useEffect(() => {
         if (stateVkIdConfig === undefined) {
             const baseDomain = process.env.NODE_ENV === "development" ? baseDomainDev : baseDomainProd;
-            const config = initVKID(baseDomain)
-            setVkIdConfig(config)
+            initVKID(baseDomain).then((config) => {
+                setVkIdConfig(config)
+            })
         }
     }, [setVkIdConfig, stateVkIdConfig]);
-
 
 
     useEffect(() => {
@@ -43,11 +50,9 @@ export const VkIdProvider: FC<WrapperProps> = ({children}) => {
                 setIsAuthorized(true)
             } else {
                 const refreshToken = await getRefreshToken()
-                const deviceId = await getDeviceId()
-                if (refreshToken != "") {
+                if (refreshToken != "" && stateVkIdConfig) {
                     try {
-                        const result = await VKID.Auth.refreshToken(refreshToken, deviceId);
-                        actionAfterExchangeCode(result).then(() => {
+                        refreshTokenAction({configString: JSON.stringify(stateVkIdConfig.get())}).then(() => {
                             setIsAuthorized(true)
                         })
                     } catch (err) {
