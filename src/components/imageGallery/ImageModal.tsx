@@ -68,10 +68,8 @@ export const ImageModal: FC<ImageModalProps> = ({
                         handlePrev();
                     }
                 }}
-                maxW="90vw"
-                maxH="90vh"
                 h={'full'}
-                aspectRatio={1}
+                w={'full'}
                 overflow='hidden'
                 position={'relative'}
             >
@@ -79,7 +77,7 @@ export const ImageModal: FC<ImageModalProps> = ({
                     src={images[selectedIndex]}
                     alt={`full-image-${selectedIndex}`}
                     fill
-                    objectFit='cover'
+                    objectFit='contain'
                     style={{pointerEvents: 'none'}}
                 />
             </Box>
@@ -95,6 +93,8 @@ export const ImageModal: FC<ImageModalProps> = ({
                 left="5%"
                 transform="translateY(-50%)"
                 colorScheme="whiteAlpha"
+                backdropFilter='auto'
+                backdropBlur='sm'
             />
             <IconButton
                 aria-label="Next Image"
@@ -108,6 +108,8 @@ export const ImageModal: FC<ImageModalProps> = ({
                 right="5%"
                 transform="translateY(-50%)"
                 colorScheme="whiteAlpha"
+                backdropFilter='auto'
+                backdropBlur='sm'
             />
             <IconButton
                 aria-label="Close"
@@ -120,6 +122,8 @@ export const ImageModal: FC<ImageModalProps> = ({
                 top="5%"
                 right="5%"
                 colorScheme="whiteAlpha"
+                backdropFilter='auto'
+                backdropBlur='sm'
             />
         </motion.div>
     );
