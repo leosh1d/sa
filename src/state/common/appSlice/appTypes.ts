@@ -4,6 +4,7 @@ import {UserInfoResult} from "@vkid/sdk";
 export interface AppSliceData {
     vkIdConfig: Config | undefined;
     isAuthorized: boolean,
+    isAuthorizedCheck: boolean,
     img: string | undefined;
     name: string | undefined;
     phone: string | undefined

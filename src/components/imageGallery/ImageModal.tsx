@@ -70,7 +70,6 @@ export const ImageModal: FC<ImageModalProps> = ({
                 }}
                 maxW="90vw"
                 maxH="90vh"
-                w={'full'}
                 h={'full'}
                 aspectRatio={1}
                 overflow='hidden'

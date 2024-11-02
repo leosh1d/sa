@@ -4,11 +4,8 @@ import {VStack, Button} from "@chakra-ui/react";
 import {ChangeEventHandler, useState} from "react";
 import {getRegi, Rega} from "@/app/api/userActions/getRegi";
 import {useCommonState} from "@/state/common/commonState";
-import * as VKID from "@vkid/sdk";
-import {getAccessToken} from "@/components/auth/getAccessToken";
 import {useRouter} from "next/navigation";
-import {deleteRefreshToken} from "@/components/auth/deleteRefreshToken";
-import {deleteAccessToken} from "@/components/auth/deleteAccessToken";
+import {LogoutAction} from "@/components/auth/logout";
 
 type RegiState = {
     isLoading: boolean,
@@ -70,13 +67,11 @@ export default function AccountPage() {
             {/*    </>}*/}
             {/*</Box>*/}
 
-            {isAuthorized && <Button onClick={async () => {
-                const token = await getAccessToken()
-                await deleteAccessToken()
-                await deleteRefreshToken()
-                token && await VKID.Auth.logout(token)
-                setIsAuthorized(false)
-                router.push('/')
+            {isAuthorized && <Button onClick={() => {
+                LogoutAction().then(() => {
+                    setIsAuthorized(false)
+                    router.push('/')
+                })
             }
             }>выйти из аккаунта</Button>}
 

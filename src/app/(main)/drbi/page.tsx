@@ -3,16 +3,21 @@ import {VStack, Container, Text} from "@chakra-ui/react";
 import {EventCardFull} from "@/components/events/eventCard";
 import {VKGallery} from "@/components/vkGallery/vkGallery";
 import {RegModal} from "@/components/events/regModal";
+import {CoordCard} from "@/components/coordCard";
 
 export default function Drbi() {
 
     return (
         <VStack w='full' pb={24} spacing={4}>
             <Container maxW='container.xl' pb={12}>
-                <EventCardFull eventType={'drbi'} title={'день рождения бизнес информатики'}>
+                <EventCardFull eventType={'drbi'} title={'день рождения бизнес-информатики'} coords={<>
+                    <CoordCard name={'рыжов кирилл'} img={'/rk.jpeg'} description={'главный координатор'} tgLink={'kruzhovv'}/>
+                    <CoordCard name={'эрика касенова'} img={'/erika.jpg'} description={'координатор программы'} tgLink={'ellanta'}/>
+                    <CoordCard name={'алексей пудочев'} img={'/ap.jpeg'} description={'координатор пиара'} tgLink={'leosh1d'}/>
+                </>}>
                     <Text>
                         день рождения образовательной программы «бизнес-информатика», на котором студенты и
-                        преподаватели проводят совместный досуг, общаются, участвуют в квизах, смотрят на
+                        преподаватели проводят совместный досуг, общаются, смотрят на
                         выступления приглашеных гостей</Text>
                     <RegModal/>
 

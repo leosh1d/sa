@@ -6,6 +6,7 @@ export const appInitialData:AppSliceData = {
     last_name: undefined,
     vkIdConfig: undefined,
     isAuthorized: false,
+    isAuthorizedCheck: false,
     img: undefined,
     name: undefined
 }

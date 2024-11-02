@@ -32,8 +32,9 @@ export async function fetchPhotos(albumId: string): Promise<string[]> {
 
     for (let offset = 0; ; offset += count) {
         const response = await fetch(
-            `https://api.vk.com/method/photos.get?owner_id=${ownerId}&album_id=${albumParsedId}&access_token=${token}&v=5.131&offset=${offset}&count=${count}`
+            `https://api.vk.com/method/photos.get?owner_id=${ownerId}&album_id=${albumParsedId}&access_token=${process.env.VK_API_SERVICE_TOKEN}&v=5.131&offset=${offset}&count=${count}`
         );
+        console.log(response)
 
         if (!response.ok) {
             throw new Error('Не удалось загрузить фотографии');

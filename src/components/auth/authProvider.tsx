@@ -7,8 +7,6 @@ import {VkIdProvider} from "@/components/auth/vkIdProvider";
 export const AuthProvider: FC<WrapperProps> = ({children}) => {
     const isAuthorized = useCommonState((state) => state.isAuthorized)
 
-
-
     if (!isAuthorized) {
         return <Suspense> <VkIdProvider>{children}</VkIdProvider> </Suspense>
     }

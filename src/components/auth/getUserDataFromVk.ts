@@ -2,6 +2,7 @@
 
 import * as VKID from "@vkid/sdk";
 import {getUserData} from "@/components/auth/actions/getUserData";
+import {LogoutAction} from "@/components/auth/logout";
 
 export const getUserDataFromVk = async (callback: (info: VKID.UserInfoResult) => void) => {
     // const token = await getAccessToken()
@@ -11,9 +12,7 @@ export const getUserDataFromVk = async (callback: (info: VKID.UserInfoResult) =>
     console.warn(data)
     if (data.error) {
         console.error(data.error)
-        // setIsAuthorized(false)
-        // deleteAccessToken()
-        // deleteRefreshToken()
+        await LogoutAction()
     } else {
         callback({
             user: {

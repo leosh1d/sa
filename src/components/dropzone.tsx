@@ -3,7 +3,6 @@ import { useDropzone } from 'react-dropzone';
 import {
     Box,
     Text,
-    useColorModeValue,
     Stack,
 } from '@chakra-ui/react';
 
@@ -14,7 +13,6 @@ interface DropzoneProps {
 export const Dropzone: React.FC<DropzoneProps> = ({ onDrop }) => {
     const onDropAccepted = useCallback(
         (acceptedFiles: File[]) => {
-            console.warn(acceptedFiles)
             onDrop(acceptedFiles);
         },
         [onDrop]

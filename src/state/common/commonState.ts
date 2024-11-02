@@ -8,7 +8,8 @@ export const useCommonState = create<AppSlice>((set) => ({
         set({vkIdConfig: payload})
     ),
     setIsAuthorized: ((payload) =>
-            set({isAuthorized: payload})
+            set({isAuthorized: payload, isAuthorizedCheck: true})
     ),
+
     setUserInfo: ((payload) => set({img: payload.user.avatar, name: `${payload.user.first_name} ${payload.user.last_name}`, phone: payload.user.phone,first_name: payload.user.first_name ,last_name: payload.user.last_name})),
 }))

@@ -4,15 +4,14 @@ import {baseDomainDev, baseDomainProd} from "@/consts/app";
 import {WrapperProps} from "@/types/base";
 import {FC, useEffect} from "react";
 import {useCommonState} from "@/state/common/commonState";
-import {actionAfterExchangeCode} from "@/components/auth/actionAfterExchangeCode";
 import {getRefreshToken} from "@/components/auth/getRefreshToken";
-import {getDeviceId} from "@/components/auth/getDeviceId";
 import {deleteRefreshToken} from "@/components/auth/deleteRefreshToken";
 import {checkToken} from "@/components/auth/checkToken";
 import {getUserId} from "@/components/auth/getUserId";
 import {getVerifierAndChallengeCodes} from "@/components/auth/getVerifierAndChallengeCodes";
 import {refreshTokenAction} from "@/components/auth/refreshTokenAction";
 
+export const SCOPE = 'email phone vkid.personal_info'
 
 const initVKID = async (domain: string) => {
     const {codeChallenge} = await getVerifierAndChallengeCodes()
@@ -20,7 +19,7 @@ const initVKID = async (domain: string) => {
         app: Number(process.env.NEXT_PUBLIC_VKID_APP_ID), // Идентификатор приложения.
         redirectUrl: domain, // Адрес для перехода после авторизации.
         state: 'studaktivstudaktiv2112',
-        scope: 'email phone vkid.personal_info', // Список прав доступа, которые нужны приложению.
+        scope: SCOPE, // Список прав доступа, которые нужны приложению.
         mode: VKID.ConfigAuthMode.Redirect, // По умолчанию авторизация открывается в новой вкладке.
         codeChallenge: codeChallenge,
     })
@@ -58,12 +57,15 @@ export const VkIdProvider: FC<WrapperProps> = ({children}) => {
                     } catch (err) {
                         console.error(err)
                         await deleteRefreshToken()
+                        setIsAuthorized(false)
                     }
+                } else {
+                    setIsAuthorized(false)
                 }
             }
         }
         checkTokenAction()
-    }, [setIsAuthorized]);
+    }, [setIsAuthorized, stateVkIdConfig]);
 
 
     if (stateVkIdConfig === undefined) {

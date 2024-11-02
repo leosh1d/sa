@@ -13,7 +13,7 @@ const ImageWithSkeleton: React.FC<ImageProps> = ({ ...props }) => {
             )}
             <Image
                 {...props}
-                onLoadingComplete={() => setIsLoading(false)}
+                onLoad={() => setIsLoading(false)}
             />
         </>
 

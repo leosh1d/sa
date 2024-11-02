@@ -1,7 +1,7 @@
 "use client"
 import {FC, Fragment, ReactNode} from "react";
 import {eventType} from "@/consts/events";
-import {Button, Flex, Heading, Text} from "@chakra-ui/react";
+import {Box, Button, Center, Flex, Heading, Text, VStack} from "@chakra-ui/react";
 import {EventIcon} from "./eventIcon";
 import {Markdown} from "@/components/markdown";
 import Link from 'next/link'
@@ -58,16 +58,26 @@ interface EventCardFullProps {
     coords?: ReactNode
     children: ReactNode
 }
-export const EventCardFull: FC<EventCardFullProps> = ({eventType, title, children}) => {
-    return <Flex justifyContent='center'  gap={4} alignItems={`center`}
-                 direction={{base: 'column', md: 'row'}} p={8}
+export const EventCardFull: FC<EventCardFullProps> = ({eventType, title, children, coords}) => {
+    return <Flex justifyContent='space-between'   alignItems={`center`}
+                 direction={{base: 'column', lg: 'row'}}
                  borderRadius={32}
+                 gap={16}
     >
-        <EventIcon boxSize={{base: 64, md: 48}} eventType={eventType} flexShrink={0}/>
-
+        <Box/>
         <Flex direction='column' gap={2} maxW={96}>
+            <Center>
+
+                <EventIcon boxSize={{base: 64, md: 48}} eventType={eventType} flexShrink={0}/>
+            </Center>
+
             <Heading fontSize='3xl'>{title}</Heading>
             {children}
         </Flex>
+        <VStack maxW={{base: 96}} w={{base: 'full', lg:'auto'}} spacing={4}>
+            {coords}
+        </VStack>
+
+
     </Flex>
 }

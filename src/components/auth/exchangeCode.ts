@@ -3,6 +3,7 @@ import {actionAfterExchangeCode} from "@/components/auth/actionAfterExchangeCode
 import {ConfigData} from "@vkid/sdk";
 import {getVerifierAndChallengeCodes} from "@/components/auth/getVerifierAndChallengeCodes";
 import {TokenResult} from "@vkid/sdk/dist-sdk/types/auth/types";
+import {SCOPE} from "@/components/auth/vkIdProvider";
 
 interface exchangeCodeProps {
     configString: string,
@@ -29,6 +30,7 @@ export const exchangeCode = async ({configString, code, deviceId}: exchangeCodeP
             client_id: String(configObj.app),
             device_id: deviceId,
             state: configObj.state || '',
+            scope: SCOPE
         }).toString()
     })
 

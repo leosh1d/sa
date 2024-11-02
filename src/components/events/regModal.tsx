@@ -21,6 +21,7 @@ import useWindowSize from 'react-use/lib/useWindowSize'
 import Confetti from 'react-confetti';
 // import {Dropzone} from "@/components/dropzone";
 import NextLink from "next/link";
+import {useCommonState} from "@/state/common/commonState";
 
 
 export const RegModal = () => {
@@ -36,8 +37,10 @@ export const RegModal = () => {
 
     // const name = useCommonState((state)=> state.name)
 
+    const name = useCommonState((state)=> state.name)
+
     const [formState, setFormState] = useState({
-        fio: '',
+        fio: name || '',
         social: '',
         phone: '',
         group: '',
@@ -110,6 +113,7 @@ export const RegModal = () => {
         }, 3000)
     }
 
+
     return <>
         <Button w='full' variant={`solid`} colorScheme={`zhgut`} onClick={onOpen}>зарегистрироваться</Button>
         <Modal isOpen={isOpen} onClose={onClose}>
@@ -125,7 +129,7 @@ export const RegModal = () => {
                         <Flex w='full' pb={4} direction='column' gap={2}>
                             <FormControl isRequired>
                                 <FormLabel>фио</FormLabel>
-                                <Input name='fio' onChange={handleInputChange}/>
+                                <Input name='fio' value={formState.fio} onChange={handleInputChange}/>
                             </FormControl>
 
                             {/*<FormControl isRequired>*/}
@@ -133,7 +137,7 @@ export const RegModal = () => {
                             {/*    <Input name='phone' onChange={handleInputChange}/>*/}
                             {/*</FormControl>*/}
                             <FormControl isRequired>
-                                <FormLabel>ссылка на вк/тг</FormLabel>
+                                <FormLabel>ссылка на тг</FormLabel>
                                 <Input name='social' onChange={handleInputChange}/>
                             </FormControl>
 
