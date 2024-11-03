@@ -58,6 +58,8 @@ export const RegModal = () => {
 
     const toast = useToast()
 
+    const isAuthorized = useCommonState((state)=> state.isAuthorized)
+
     const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         setIsLoading.on()
@@ -116,7 +118,7 @@ export const RegModal = () => {
 
 
     return <>
-        <Button w='full' variant={`solid`} colorScheme={`zhgut`} onClick={onOpen}>зарегистрироваться</Button>
+        <Button w='full' variant={`solid`} isDisabled={!isAuthorized} colorScheme={`zhgut`} onClick={onOpen}>{isAuthorized ? 'зарегистрироваться' : 'войди в вк чтобы зарегистрироваться'}</Button>
         <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay/>
             <ModalContent maxW='container.md'>
