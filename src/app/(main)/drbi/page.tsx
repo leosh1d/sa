@@ -25,7 +25,7 @@ export default function Drbi() {
                 </EventCardFull>
             </Container>
 
-            <VKGallery albumId={`-59606656_301706867`}/>
+            <VKGallery albumId={`-228114756_306372358`}/>
 
 
             {/*<Box ref={ref}/>*/}

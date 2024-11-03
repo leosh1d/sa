@@ -2,17 +2,20 @@
 
 import * as VKID from "@vkid/sdk";
 import {getUserData} from "@/components/auth/actions/getUserData";
-import {LogoutAction} from "@/components/auth/logout";
+import {refreshTokenAction} from "@/components/auth/refreshTokenAction";
+import {useCommonState} from "@/state/common/commonState";
 
 export const getUserDataFromVk = async (callback: (info: VKID.UserInfoResult) => void) => {
     // const token = await getAccessToken()
-    // const setIsAuthorized = useCommonState.getState().setIsAuthorized;
+    const vkIdConfig = useCommonState.getState().vkIdConfig;
 
     const data = await getUserData()
     console.warn(data)
     if (data.error) {
         console.error(data.error)
-        await LogoutAction()
+        if (vkIdConfig)
+            refreshTokenAction({configString: JSON.stringify(vkIdConfig.get())})
+        // await LogoutAction()
     } else {
         callback({
             user: {

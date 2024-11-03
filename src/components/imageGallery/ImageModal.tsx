@@ -32,6 +32,7 @@ export const ImageModal: FC<ImageModalProps> = ({
         setSelectedIndex((selectedIndex - 1 + images.length) % images.length);
     };
 
+    const MotionImage = motion(Image)
 
     return (
         <motion.div
@@ -70,10 +71,9 @@ export const ImageModal: FC<ImageModalProps> = ({
                 }}
                 h={'full'}
                 w={'full'}
-                overflow='hidden'
                 position={'relative'}
             >
-                <Image
+                <MotionImage
                     src={images[selectedIndex]}
                     alt={`full-image-${selectedIndex}`}
                     fill
