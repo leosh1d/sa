@@ -19,98 +19,62 @@ export async function POST(request: Request) {
 
 
     const spreadsheetId = process.env.SHEETS_TABLE_ID;
-    const range = 'рега перваши!A:L';
+    const range = 'рега клиентура!A:L';
 
     const formData = await request.formData()
 
     const fio = formData.get('fio')
     const social = formData.get('social')
-
-    const living = formData.get('living')
     const phone = formData.get('phone')
-
     const token = formData.get('token')
-    const docs = formData.get(`docs`) as File
+    const isVip = JSON.parse(<string>formData.get('isVip'))
+    const cost = formData.get(`cost`)
 
-    let publicDocsUrl = ''
-    if(docs){
-    const docsMetadata = {
-        'name': docs.name,
+    // Get the public URL
+    const check = formData.get(`check`) as File
+    const checkMetadata = {
+        'name': check.name,
     };
 
-    const docsMedia = {
+    const checkMedia = {
         mimeType: 'application/octet-stream',
-        body: toNodeReadable(docs.stream()),
+        body: toNodeReadable(check.stream()),
     };
 
-        const response = await drive.files.create({
-        requestBody: docsMetadata,
-        media: docsMedia,
+    const responseCheck = await drive.files.create({
+        requestBody: checkMetadata,
+        media: checkMedia,
         fields: 'id',
     });
 
-    const fileId = response.data.id;
+    const checkFileId = responseCheck.data.id;
 
-    if (fileId === null) {
+    if (!checkFileId) {
         return NextResponse.json({message: `File cant load`}, {status: 400});
     }
 
     // Make the file public
     await drive.permissions.create({
-        fileId,
+        fileId: checkFileId,
         requestBody: {
             role: 'reader',
             type: 'anyone'
         }
     });
 
-
-    publicDocsUrl = `https://drive.google.com/file/d/${fileId}/view`;
-}
     // Get the public URL
-    const check = formData.get(`check`) as File
-        const checkMetadata = {
-            'name': check.name,
-        };
+    const publicCheckUrl = `https://drive.google.com/file/d/${checkFileId}/view`;
 
-        const checkMedia = {
-            mimeType: 'application/octet-stream',
-            body: toNodeReadable(check.stream()),
-        };
-
-        const responseCheck = await drive.files.create({
-            requestBody: checkMetadata,
-            media: checkMedia,
-            fields: 'id',
-        });
-
-        const checkFileId = responseCheck.data.id;
-
-        if (!checkFileId) {
-            return NextResponse.json({message: `File cant load`}, {status: 400});
-        }
-
-        // Make the file public
-        await drive.permissions.create({
-            fileId: checkFileId,
-            requestBody: {
-                role: 'reader',
-                type: 'anyone'
-            }
-        });
-
-        // Get the public URL
-       const publicCheckUrl = `https://drive.google.com/file/d/${checkFileId}/view`;
 
     try {
-        // const appendResponse =  await sheets.spreadsheets.values.append({
-        //     spreadsheetId,
-        //     range,
-        //     valueInputOption: 'USER_ENTERED',
-        //     requestBody: {
-        //         values: [[new Date().toLocaleString("ru-RU", {timeZone: "Europe/Moscow"}), fio, social, `'${phone}`, '', living, '', publicDocsUrl, publicCheckUrl, 'false', 'false', token]],
-        //     },
-        // });
+        const appendResponse = await sheets.spreadsheets.values.append({
+            spreadsheetId,
+            range,
+            valueInputOption: 'USER_ENTERED',
+            requestBody: {
+                values: [[new Date().toLocaleString("ru-RU", {timeZone: "Europe/Moscow"}), fio, social, `'${phone}`, isVip ? 'випка' : 'обычный', publicCheckUrl, 'false', cost, token]],
+            },
+        });
 
         return NextResponse.json({message: 'Data added successfully'}, {status: 200});
     } catch (error) {

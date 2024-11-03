@@ -3,7 +3,6 @@ import {Rega} from "@/app/api/userActions/getRegi";
 import {FC} from "react";
 import {Clock} from "@/assets/icons/clock";
 import {Check} from "@/assets/icons/check";
-import {PosvyatPattern} from "@/components/patterns/posvyatPattern";
 
 
 interface RegaStatusProps {
@@ -31,18 +30,16 @@ const RegaStatus: FC<RegaStatusProps> = ({type, value}) => {
     </HStack>
 }
 
-export const RegaCard: FC<Rega> = ({docsIsConfirmed, checkIsConfirmed, date}) => {
+export const RegaCard: FC<Rega> = ({checkIsConfirmed, date}) => {
     return <Box maxW={80} >
         <Text>{date.split(',')[0]}</Text>
         <Box background='white'  borderRadius='24px'>
-            <Flex background='gnoyLight' borderRadius='24px' h={32} justifyContent='center' alignItems='center' position='relative' overflow='hidden'>
-                <Heading position='relative' zIndex={1} fontSize='4xl'>посвят 24</Heading>
-                <PosvyatPattern position='absolute' inset='0' />
+            <Flex borderRadius='24px' justifyContent='center' alignItems='center' position='relative' overflow='hidden'>
+                <Heading p={4} position='relative' zIndex={1} fontSize='xl'>день рождение бизнес информатики 24</Heading>
             </Flex>
             <VStack p={4} alignItems='flex-start'>
                 <Text>статус:</Text>
                 <RegaStatus type='check' value={checkIsConfirmed}/>
-                <RegaStatus type='docs' value={docsIsConfirmed}/>
             </VStack>
         </Box>
     </Box>

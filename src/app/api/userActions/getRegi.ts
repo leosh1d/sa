@@ -7,11 +7,9 @@ export interface Rega {
     date: string,
     type: eventType,
     checkIsConfirmed: boolean,
-    docsIsConfirmed: boolean,
 }
 
-
-export async function getRegi(fio: string):Promise<Rega[]> {
+export async function getRegi(token: string):Promise<Rega[]> {
 
     const auth = new google.auth.GoogleAuth({
         credentials: {
@@ -24,7 +22,7 @@ export async function getRegi(fio: string):Promise<Rega[]> {
     const sheets = google.sheets({version: 'v4', auth});
 
     const spreadsheetId = process.env.SHEETS_TABLE_ID;
-    const range = 'рега перваши!A:L';
+    const range = 'рега клиентура!A:L';
 
 
     const response = await sheets.spreadsheets.values.get({
@@ -39,21 +37,18 @@ export async function getRegi(fio: string):Promise<Rega[]> {
     }
 
 
-    const lowerFio = fio.toLowerCase()
-    const rega:string[] = values.find((item)=> item[1].toLowerCase() === lowerFio) || [];
+    const rega:string[] = values.find((item)=> item[8].toLowerCase() === token) || [];
 
     if(rega.length === 0){
         return []
     }
 
-    const checkIsConfirmed = rega[9] === "TRUE";
-    const docsIsConfirmed = rega[10] === "TRUE"
+    const checkIsConfirmed = rega[6] === "TRUE";
 
 
     return [{
         date: rega[0],
-        type:"posvyat",
+        type:"drbi",
         checkIsConfirmed,
-        docsIsConfirmed
     }]
 }

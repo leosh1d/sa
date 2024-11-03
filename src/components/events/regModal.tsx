@@ -1,6 +1,6 @@
 'use client'
 
-import {useBoolean, useDisclosure} from "@chakra-ui/hooks";
+import {useBoolean, useClipboard, useDisclosure} from "@chakra-ui/hooks";
 import {
     Button, FormControl, Heading, Modal,
     ModalBody,
@@ -12,17 +12,19 @@ import {
     Flex,
     Text,
     Box,
-    Link, useToast, Checkbox
+    Link, useToast, Checkbox, HStack
 } from "@chakra-ui/react";
-import {ChangeEventHandler, FormEventHandler, useCallback, useState} from "react";
+import {ChangeEventHandler, FormEventHandler, useCallback, useEffect, useState} from "react";
 import useWindowSize from 'react-use/lib/useWindowSize'
 // import {useClipboard} from '@chakra-ui/react'
 
 import Confetti from 'react-confetti';
-// import {Dropzone} from "@/components/dropzone";
+import {Dropzone} from "@/components/dropzone";
 import NextLink from "next/link";
 import {useCommonState} from "@/state/common/commonState";
-
+import {TariffSwitch} from "@/components/events/tariffSwitch";
+import {getUserId} from "@/components/auth/getUserId";
+import {COST_BASIC, COST_VIP} from "@/consts/app";
 
 export const RegModal = () => {
     const {isOpen, onClose, onOpen} = useDisclosure()
@@ -31,24 +33,27 @@ export const RegModal = () => {
     const [showConfetti, setShowConfetti] = useBoolean(false)
     const {width, height} = useWindowSize()
 
-    // const {onCopy, hasCopied} = useClipboard('4377727800362357')
+    const {onCopy, hasCopied} = useClipboard('2200280670371378')
     // const {onCopy: onCopyPhone, hasCopied: hasCopiedPhone} = useClipboard('+79107751282')
 
 
-    // const name = useCommonState((state)=> state.name)
-
-    const name = useCommonState((state)=> state.name)
+    const name = useCommonState((state) => state.name)
 
     const [formState, setFormState] = useState({
         fio: name || '',
         social: '',
         phone: '',
-        group: '',
-        living: ''
     })
+    useEffect(() => {
+        if (name !== undefined && formState.fio === '') {
+            setFormState({...formState, fio: name})
+        }
+    }, [formState, name]);
+
+    const [isVip, setIsVip] = useBoolean(false)
+
 
     const [isLoading, setIsLoading] = useBoolean()
-    const [docsFile, setDocs] = useState<File | null>(null)
     const [checkFile, setCheckFile] = useState<File | null>(null)
 
     const toast = useToast()
@@ -63,7 +68,6 @@ export const RegModal = () => {
                 status: 'error',
                 description: "заполни поля с файлами",
                 isClosable: true,
-
             })
             setIsLoading.off()
 
@@ -72,29 +76,26 @@ export const RegModal = () => {
 
         const formData = new FormData()
         formData.append("check", checkFile)
-        formData.append("docs", docsFile || "")
 
         formData.append("fio", formState.fio)
         formData.append("social", formState.social)
         formData.append("phone", formState.phone)
-        formData.append("group", formState.group)
-        formData.append("living", formState.living)
-        formData.append("token", formState.fio)
+        formData.append("isVip", JSON.stringify(isVip.valueOf()))
+        formData.append("cost", `${isVip ? COST_VIP : COST_BASIC}`)
 
-        // const response = await fetch('/api/event-reg', {
-        //     method: 'POST',
-        //     body: formData
-        // });
+        const userId = await getUserId()
+        formData.append("token", userId || formState.fio)
+
+        const response = await fetch('/api/event-reg', {
+            method: 'POST',
+            body: formData
+        });
 
         setIsLoading.off()
         onClose()
         handleConfetti()
         onOpenSuccess()
     };
-
-    const onDropDocs = useCallback((acceptedFiles: File[]) => {
-        setDocs(acceptedFiles[0])
-    }, [])
 
     const onDropCheck = useCallback((acceptedFiles: File[]) => {
         setCheckFile(acceptedFiles[0])
@@ -118,7 +119,7 @@ export const RegModal = () => {
         <Button w='full' variant={`solid`} colorScheme={`zhgut`} onClick={onOpen}>зарегистрироваться</Button>
         <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay/>
-            <ModalContent>
+            <ModalContent maxW='container.md'>
                 <ModalHeader>
                     <Heading fontSize='2xl'>регистрация</Heading>
                 </ModalHeader>
@@ -151,16 +152,16 @@ export const RegModal = () => {
                             {/*    <Input name='living' onChange={handleInputChange}/>*/}
                             {/*</FormControl>*/}
 
-                            {/*<Text>необходимо оплатить 4900₽</Text>*/}
-                            {/*<HStack>*/}
-                            {/*    <Input readOnly value='4377 7278 0036 2357'/>*/}
-                            {/*    <Button colorScheme='zhgut' px={12} onClick={onCopy}*/}
-                            {/*            isDisabled={hasCopied}>{hasCopied ? 'Скопировано' : 'Скопировать'}</Button>*/}
-                            {/*</HStack>*/}
-                            {/*<Text textAlign='right'>т-банк, <Link target="_blank" color='lobotomia.500'*/}
-                            {/*                                      textDecoration='underline'*/}
-                            {/*                                      href='https://vk.com/sovavocado'>никита*/}
-                            {/*    сластионов</Link></Text>*/}
+                            <Text>реквизиты для оплаты:</Text>
+                            <HStack>
+                                <Input readOnly value='2200 2806 7037 1378'/>
+                                <Button colorScheme='zhgut' px={12} onClick={onCopy}
+                                        isDisabled={hasCopied}>{hasCopied ? 'Скопировано' : 'Скопировать'}</Button>
+                            </HStack>
+                            <Text textAlign='right'>т-банк, <Link target="_blank" color='lobotomia.500'
+                                                                  textDecoration='underline'
+                                                                  href='https://vk.com/sovavocado'>никита
+                                сластионов</Link></Text>
 
                             {/*<Text>номер телефона (для сбп)</Text>*/}
                             {/*<HStack>*/}
@@ -169,11 +170,11 @@ export const RegModal = () => {
                             {/*            isDisabled={hasCopiedPhone}>{hasCopiedPhone ? 'Скопировано' : 'Скопировать'}</Button>*/}
                             {/*</HStack>*/}
 
-                            {/*<FormControl isRequired>*/}
-                            {/*    <FormLabel>чек об оплате</FormLabel>*/}
+                            <FormControl isRequired>
+                                <FormLabel>чек об оплате</FormLabel>
 
-                            {/*    <Dropzone onDrop={onDropCheck}/>*/}
-                            {/*</FormControl>*/}
+                                <Dropzone onDrop={onDropCheck}/>
+                            </FormControl>
 
 
                             {/*<FormControl>*/}
@@ -196,11 +197,19 @@ export const RegModal = () => {
                             {/*        совершеннолетние*/}
                             {/*    </Link>*/}
                             {/*</Flex>*/}
-                            <Checkbox isRequired colorScheme='zhgut'>соглашаюсь с <Link as={NextLink} href='docs/privacy' textDecoration='underline'>политикой в отношении обработки персональных данных</Link> </Checkbox>
-                            <Checkbox isRequired colorScheme='zhgut' >соглашаюсь на <Link as={NextLink} href='docs/privacy' textDecoration='underline'>обработку персональных данных</Link> </Checkbox>
+                            <TariffSwitch isVip={isVip} setIsVip={setIsVip}/>
+                            <Flex justifyContent='space-between'>
+                                <Text fontSize='xl'>итого:</Text>
+                                <Text fontSize='xl'>{isVip ? COST_VIP : COST_BASIC} ₽</Text>
+                            </Flex>
+                            {/*<Checkbox isRequired colorScheme='zhgut'>соглашаюсь с <Link as={NextLink} href='docs/privacy' textDecoration='underline'>политикой в отношении обработки персональных данных</Link> </Checkbox>*/}
+                            <Checkbox isRequired colorScheme='zhgut'>соглашаюсь на <Link as={NextLink}
+                                                                                         href='docs/privacy'
+                                                                                         textDecoration='underline'>обработку
+                                персональных данных</Link> </Checkbox>
 
-                            <Button isLoading={isLoading} colorScheme='zhgut' type='submit'
-                                    mt={4} isDisabled>регистрация скоро откроется!</Button>
+                            <Button isLoading={isLoading}     loadingText='Загружаем чек' colorScheme='zhgut' type='submit'
+                                    mt={4}>зарегистрироваться</Button>
                         </Flex>
 
                     </form>
