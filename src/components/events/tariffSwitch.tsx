@@ -1,7 +1,8 @@
-import {Box, VStack, Text, Flex, Button} from "@chakra-ui/react"
+import {Box, VStack, Text, Flex, Button, FlexProps, BoxProps} from "@chakra-ui/react"
 import {motion} from "framer-motion";
+import {ForwardRefExoticComponent} from "react";
 
-const MotionBox = motion(Box);
+const MotionBox = motion(Box as ForwardRefExoticComponent<BoxProps>);
 
 interface TariffSwitchProps {
     isVip: boolean,
@@ -19,7 +20,6 @@ export const TariffSwitch = ({isVip, setIsVip}: TariffSwitchProps) => {
             <Button w='50%' variant='ghost' colorScheme='white' onClick={setIsVip.off}>обычный</Button>
             <Button w='50%' variant='ghost' colorScheme='white' onClick={setIsVip.on}>вип</Button>
             <MotionBox layout borderRadius='16px' pos='absolute' w='50%' h='full' bg={'gray.200'}
-                       animate={isVip? {bg: 'purple.200'} : {bg: 'gray.200'}}
                        left={!isVip ? 0 : undefined} right={isVip ? 0 : undefined} zIndex={-1}/>
         </Flex>
 
