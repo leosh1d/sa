@@ -91,12 +91,22 @@ export const RegModal = () => {
         const response = await fetch('/api/event-reg', {
             method: 'POST',
             body: formData
-        });
+        })
 
-        setIsLoading.off()
-        onClose()
-        handleConfetti()
-        onOpenSuccess()
+        if(response.ok){
+            setIsLoading.off()
+            onClose()
+            handleConfetti()
+            onOpenSuccess()
+        } else {
+            toast({
+                title: "ошибка при регистрации",
+                status: 'error',
+                description: "напиши в телеграмм @leosh1d для решения проблемы",
+                isClosable: true,
+            })
+        }
+
     };
 
     const onDropCheck = useCallback((acceptedFiles: File[]) => {
