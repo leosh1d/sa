@@ -7,6 +7,7 @@ import {Rega} from "@/app/api/userActions/getRegi";
 import {RegaCard} from "@/components/events/regaCard";
 import {LinkUserId} from "@/app/api/userActions/linkUserId";
 import {useCommonState} from "@/state/common/commonState";
+import {getUserId} from "@/components/auth/getUserId";
 
 type LinkState = {
     isLoading: boolean,
@@ -30,6 +31,18 @@ export default function LinkProfilePage() {
 
     const action = async () => {
         setState({...state, isLoading: true})
+        const userId = await getUserId()
+
+        if (!userId) {
+            toast({
+                title: "отсуствует userId",
+                description: "попробуй перезайти в вк и вернись на страницу",
+                status: 'error',
+                isClosable: true,
+            })
+            return
+        }
+
         const regi = await LinkUserId(inputText)
         if (regi.length === 0) {
             return setState({isLoading: false, value: [], searched: true})
