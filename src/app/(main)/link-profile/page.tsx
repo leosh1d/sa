@@ -53,10 +53,13 @@ export default function LinkProfilePage() {
         }
     }
     const isAuthorized = useCommonState((state) => state.isAuthorized)
+    const isAuthorizedCheck = useCommonState((state) => state.isAuthorizedCheck)
 
     return (
         <VStack w={`full`}>
-            {isAuthorized ? <Box p={2}>
+            {!isAuthorizedCheck ? <Skeleton>
+                <RegaCard date='' type='drbi' checkIsConfirmed={false}/>
+            </Skeleton> : isAuthorized ? <Box p={2}>
                     {state.isLoading ? <Skeleton>
                         <RegaCard date='' type='drbi' checkIsConfirmed={false}/>
                     </Skeleton> : <>
