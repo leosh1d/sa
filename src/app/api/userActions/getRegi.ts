@@ -37,7 +37,7 @@ export async function getRegi(token: string):Promise<Rega[]> {
     }
 
 
-    const rega:string[] = values.find((item)=> item[8].toLowerCase() === token) || [];
+    const rega:string[] = values.find((item)=> (item[8] || '').toLowerCase() === token) || [];
 
     if(rega.length === 0){
         return []
