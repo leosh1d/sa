@@ -22,6 +22,10 @@ const buttonOutlineStyle = defineStyle({
         color: 'zhgut.500',
         fontWeight: '700'
     },
+    "_hover": {
+        background: 'zhgut.300',
+        color: 'white',
+    },
     "_focus": {
         background: 'zhgut.500',
         color: 'white'

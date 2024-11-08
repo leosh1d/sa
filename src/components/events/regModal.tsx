@@ -58,11 +58,23 @@ export const RegModal = () => {
 
     const toast = useToast()
 
-    const isAuthorized = useCommonState((state)=> state.isAuthorized)
+    const isAuthorized = useCommonState((state) => state.isAuthorized)
 
     const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         setIsLoading.on()
+
+        const userId = await getUserId()
+        if (!userId) {
+            toast({
+                title: "ошибка при регистрации связанная с userId",
+                status: 'error',
+                description: "напиши в телеграмм @leosh1d для решения проблемы",
+                isClosable: true,
+            })
+            return
+        }
+
 
         if (!checkFile) {
             toast({
@@ -84,8 +96,6 @@ export const RegModal = () => {
         formData.append("phone", formState.phone)
         formData.append("isVip", JSON.stringify(isVip.valueOf()))
         formData.append("cost", `${isVip ? COST_VIP : COST_BASIC}`)
-
-        const userId = await getUserId()
         formData.append("token", userId || formState.fio)
 
         const response = await fetch('/api/event-reg', {
@@ -93,7 +103,7 @@ export const RegModal = () => {
             body: formData
         })
 
-        if(response.ok){
+        if (response.ok) {
             setIsLoading.off()
             onClose()
             handleConfetti()
@@ -128,7 +138,8 @@ export const RegModal = () => {
 
 
     return <>
-        <Button w='full' variant={`solid`} isDisabled={!isAuthorized} colorScheme={`zhgut`} onClick={onOpen}>{isAuthorized ? 'зарегистрироваться' : 'войди в вк чтобы зарегистрироваться'}</Button>
+        <Button w='full' variant={`solid`} isDisabled={!isAuthorized} colorScheme={`zhgut`}
+                onClick={onOpen}>{isAuthorized ? 'зарегистрироваться' : 'войди в вк чтобы зарегистрироваться'}</Button>
         <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay/>
             <ModalContent maxW='container.md'>
@@ -171,8 +182,8 @@ export const RegModal = () => {
                                         isDisabled={hasCopied}>{hasCopied ? 'Скопировано' : 'Скопировать'}</Button>
                             </HStack>
                             <Text textAlign='right'>мтс-банк, <Link target="_blank" color='lobotomia.500'
-                                                                  textDecoration='underline'
-                                                                  href='https://vk.com/slastionov'>никита
+                                                                    textDecoration='underline'
+                                                                    href='https://vk.com/slastionov'>никита
                                 сластионов</Link></Text>
 
                             {/*<Text>номер телефона (для сбп)</Text>*/}
@@ -220,7 +231,7 @@ export const RegModal = () => {
                                                                                          textDecoration='underline'>обработку
                                 персональных данных</Link> </Checkbox>
 
-                            <Button isLoading={isLoading}     loadingText='Загружаем чек' colorScheme='zhgut' type='submit'
+                            <Button isLoading={isLoading} loadingText='Загружаем чек' colorScheme='zhgut' type='submit'
                                     mt={4}>зарегистрироваться</Button>
                         </Flex>
 
