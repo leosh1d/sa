@@ -50,8 +50,8 @@ export async function LinkUserId(fio: string): Promise<Rega[]> {
     const checkIsConfirmed = rega[6] === "TRUE";
 
     const userId = await getUserId()
-
-    if(rega[9] === '') {
+    console.warn(rega)
+    if (rega[9] === '' || rega[9] === undefined) {
         const updateRange = `рега клиентура!I${rowIndex + 1}`; // Преобразуем индекс строки в номер (нумерация начинается с 1)
         await sheets.spreadsheets.values.update({
             spreadsheetId: spreadsheetId as string,

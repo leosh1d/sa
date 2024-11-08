@@ -44,6 +44,7 @@ export default function LinkProfilePage() {
         }
 
         const regi = await LinkUserId(inputText)
+
         if (regi.length === 0) {
             return setState({isLoading: false, value: [], searched: true})
         }
