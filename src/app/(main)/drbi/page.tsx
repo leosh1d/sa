@@ -11,7 +11,7 @@ export default function Drbi() {
         <VStack w='full' pb={24} spacing={4}>
             <Container maxW='container.xl' pb={12}>
                 <EventCardFull eventType={'drbi'} title={'день рождения бизнес-информатики'} coords={<>
-                    <CoordCard name={'рыжов кирилл'} img={'/rk.jpeg'} description={'главный координатор'} tgLink={'kruzhovv'}/>
+                    <CoordCard name={'кирилл рыжов'} img={'/rk.jpeg'} description={'главный координатор'} tgLink={'kruzhovv'}/>
                     <CoordCard name={'эрика касенова'} img={'/erika.jpg'} description={'координатор программы'} tgLink={'ellanta'}/>
                     <CoordCard name={'алексей пудочев'} img={'/ap.jpeg'} description={'координатор пиара'} tgLink={'leosh1d'}/>
                 </>}>
