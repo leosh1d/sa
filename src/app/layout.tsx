@@ -1,9 +1,9 @@
+'use client'
 import {Providers} from "@/app/(main)/providers";
-
-
 import {Roboto_Flex} from 'next/font/google'
 import {WrapperProps} from "@/types/base";
 import Script from "next/script";
+import {AuthLayout} from "@/components/layouts/authLayout";
 
 const roboto_flex = Roboto_Flex({
     subsets: ["latin", "cyrillic"], variable: '--font-robotoFlex',
@@ -23,12 +23,9 @@ export default function RootLayout({
                 name="description"
                 content="студактив бизнес информатики"/>
             <Script
-                id="inline-script"
-                strategy="afterInteractive"
+                strategy="beforeInteractive"
                 dangerouslySetInnerHTML={{
                     __html: `
-                    <!-- Yandex.Metrika counter -->
-                    <script type="text/javascript" >
                        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
                        m[i].l=1*new Date();
                        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
@@ -40,13 +37,19 @@ export default function RootLayout({
                             trackLinks:true,
                             accurateTrackBounce:true
                        });
-                    </script>
-                    <noscript><div><img src="https://mc.yandex.ru/watch/97446082" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-                    <!-- /Yandex.Metrika counter -->    `,
+                    `,
                 }}
-            />        </head>
-        <body><Providers>
-            {children}
+            />
+        </head>
+
+        <body>
+        <noscript>
+            <div><img src="https://mc.yandex.ru/watch/97446082" style={{position: 'absolute', left: '-9999px'}}
+                      alt=""/>
+            </div>
+        </noscript>
+        <Providers>
+                {children}
         </Providers></body>
         </html>
 

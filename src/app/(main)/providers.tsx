@@ -5,9 +5,15 @@ import theme from "@/app/(main)/theme";
 import {WrapperProps} from "@/types/base";
 import {FC} from "react";
 import {AuthProvider} from "@/components/auth/authProvider";
+import {AuthLayout} from "@/components/layouts/authLayout";
 
 export const Providers: FC<WrapperProps> = ({children}) => {
     return <AuthProvider>
-        <ChakraProvider theme={theme}>{children}</ChakraProvider>
+        <ChakraProvider theme={theme}>
+            <AuthLayout>
+                {children}
+            </AuthLayout>
+        </ChakraProvider>
+
     </AuthProvider>
 }
