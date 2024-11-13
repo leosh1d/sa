@@ -181,7 +181,7 @@ export const RegModal = () => {
                                 <Button colorScheme='zhgut' px={12} onClick={onCopy}
                                         isDisabled={hasCopied}>{hasCopied ? 'Скопировано' : 'Скопировать'}</Button>
                             </HStack>
-                            <Text textAlign='right'>мтс-банк, <Link target="_blank" color='lobotomia.500'
+                            <Text textAlign='right'>т-банк, <Link target="_blank" color='lobotomia.500'
                                                                     textDecoration='underline'
                                                                     href='https://vk.com/slastionov'>никита
                                 сластионов</Link></Text>
