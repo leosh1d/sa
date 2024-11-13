@@ -6,7 +6,8 @@ const nextConfig = {
                 protocol: 'https',
                 hostname: '**.userapi.com'
             }
-        ]
+        ],
+        unoptimized: true
     }
 };
 
