@@ -33,7 +33,7 @@ export const RegModal = () => {
     const [showConfetti, setShowConfetti] = useBoolean(false)
     const {width, height} = useWindowSize()
 
-    const {onCopy, hasCopied} = useClipboard('2200700483161195')
+    const {onCopy, hasCopied} = useClipboard('+79167172126')
     // const {onCopy: onCopyPhone, hasCopied: hasCopiedPhone} = useClipboard('+79107751282')
 
 
@@ -177,7 +177,7 @@ export const RegModal = () => {
 
                             <Text>реквизиты для оплаты:</Text>
                             <HStack>
-                                <Input readOnly value='2200700483161195'/>
+                                <Input readOnly value='+79167172126'/>
                                 <Button colorScheme='zhgut' px={12} onClick={onCopy}
                                         isDisabled={hasCopied}>{hasCopied ? 'Скопировано' : 'Скопировать'}</Button>
                             </HStack>
