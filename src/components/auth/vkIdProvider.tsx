@@ -10,6 +10,7 @@ import {checkToken} from "@/components/auth/checkToken";
 import {getUserId} from "@/components/auth/getUserId";
 import {getVerifierAndChallengeCodes} from "@/components/auth/getVerifierAndChallengeCodes";
 import {refreshTokenAction} from "@/components/auth/refreshTokenAction";
+import {getAccessToken} from "@/components/auth/getAccessToken";
 
 export const SCOPE = 'email phone vkid.personal_info'
 
@@ -41,9 +42,18 @@ export const VkIdProvider: FC<WrapperProps> = ({children}) => {
 
     useEffect(() => {
         const checkTokenAction = async () => {
+
+            const access_token = await getAccessToken()
+
+            if (access_token === "") {
+                setIsAuthorized(false)
+
+                return
+            }
+
             const isValidToken = await checkToken()
             const isUserId = await getUserId()
-            const isAuth = isValidToken && isUserId !== null
+            const isAuth = isValidToken && (isUserId !== null)
 
             if (isAuth) {
                 setIsAuthorized(true)
