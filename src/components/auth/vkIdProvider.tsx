@@ -53,7 +53,7 @@ export const VkIdProvider: FC<WrapperProps> = ({children}) => {
 
             const isValidToken = await checkToken()
             const isUserId = await getUserId()
-            const isAuth = isValidToken && (isUserId !== null)
+            const isAuth = isValidToken && (isUserId !== null && isUserId !== undefined)
 
             if (isAuth) {
                 setIsAuthorized(true)
