@@ -71,11 +71,11 @@ export default function LinkProfilePage() {
     return (
         <VStack w={`full`}>
             {!isAuthorizedCheck ? <Skeleton>
-                <RegaCard date='' name='' type='drbi' checkIsConfirmed={false} ticketType={'обычный'}
+                <RegaCard id='' date='' name='' type='drbi' checkIsConfirmed={false} ticketType={'обычный'}
                           usedTicker={false}/>
             </Skeleton> : isAuthorized ? <Box p={2}>
                     {state.isLoading ? <Skeleton>
-                        <RegaCard date='' name='' type='drbi' checkIsConfirmed={false} ticketType={'обычный'}
+                        <RegaCard id='' date='' name='' type='drbi' checkIsConfirmed={false} ticketType={'обычный'}
                                   usedTicker={false}/>
                     </Skeleton> : <>
                         {!state.searched ? <form onSubmit={action}>
@@ -96,7 +96,7 @@ export default function LinkProfilePage() {
                                     w='full'
                                     onClick={() => setState({...state, searched: false})}
                             >поискать заново</Button>
-                        </VStack> : state.value.map((item) => <RegaCard name='' ticketType='обычный' usedTicker={false}
+                        </VStack> : state.value.map((item) => <RegaCard id='' name='' ticketType='обычный' usedTicker={false}
                                                                         key={item.date} {...item}/>)}
                     </>}
                 </Box>
