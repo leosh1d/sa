@@ -47,7 +47,7 @@ export default function LinkProfilePage() {
         if (regi.length === 0) {
             return setState({isLoading: false, value: [], searched: true})
         }
-        if (!regi[0].isHaveId) {
+        if (!regi[0].isEmptyId) {
             setState({isLoading: false, value: regi, searched: true})
             toast({
                 title: "токен установлен!",
@@ -81,7 +81,7 @@ export default function LinkProfilePage() {
                         {!state.searched ? <form onSubmit={action}>
                             <VStack>
                                 <FormControl isRequired>
-                                    <FormLabel>введи свое фио для линковки с записью в таблице</FormLabel>
+                                    <FormLabel>у твоей проходки нет айди из вк, введи свое фио чтобы все заработало</FormLabel>
                                     <Input onChange={handleInputChange}/>
                                 </FormControl>
                                 <Button w='full' type='submit' colorScheme='zhgut'>найти</Button> </VStack>

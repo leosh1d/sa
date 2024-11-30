@@ -8,7 +8,7 @@ import {useRouter} from "next/navigation";
 import {LogoutAction} from "@/components/auth/logout";
 import {getUserId} from "@/components/auth/getUserId";
 import {RegaCard} from "@/components/events/regaCard";
-import Link from "next/link";
+import LinkProfilePage from "@/app/(main)/link-profile/page";
 
 type RegiState = {
     isLoading: boolean,
@@ -56,10 +56,7 @@ export default function AccountPage() {
                         <RegaCard date='' type='drbi' checkIsConfirmed={false} name={''} ticketType={'обычный'} usedTicker={false} id={''}/>
                     </Skeleton> : <>
                         {state.value.length === 0 ? <>
-                            <Text>пока нет оплаченных проходок </Text>
-                            <Link href={'/'}>
-                                <Button colorScheme='zhgut'>вернуться на главную</Button>
-                            </Link>
+                           <LinkProfilePage/>
                         </> : state.value.map((item) => <RegaCard key={item.date} {...item}/>)}
                     </>}
             </VStack>

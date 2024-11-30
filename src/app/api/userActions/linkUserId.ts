@@ -8,7 +8,7 @@ export interface LinkRega {
     date: string,
     type: eventType,
     checkIsConfirmed: boolean,
-    isHaveId: boolean
+    isEmptyId: boolean
 }
 
 export async function LinkUserId(fio: string): Promise<LinkRega[]> {
@@ -49,7 +49,7 @@ export async function LinkUserId(fio: string): Promise<LinkRega[]> {
     const checkIsConfirmed = rega[6] === "TRUE";
 
     const userId = await getUserId()
-    if (rega[8] === '' || rega[8] === undefined) {
+    if ((rega[8] === '' || rega[8] === undefined) && userId && userId !== 'undefined') {
         const updateRange = `рега клиентура!I${rowIndex + 1}`; // Преобразуем индекс строки в номер (нумерация начинается с 1)
         await sheets.spreadsheets.values.update({
             spreadsheetId: spreadsheetId as string,
@@ -64,14 +64,14 @@ export async function LinkUserId(fio: string): Promise<LinkRega[]> {
             date: rega[0],
             type: "drbi",
             checkIsConfirmed,
-            isHaveId: false
+            isEmptyId: false
         }]
     } else {
         return [{
             date: rega[0],
             type: "drbi",
             checkIsConfirmed,
-            isHaveId: true
+            isEmptyId: true
         }]
     }
 }
