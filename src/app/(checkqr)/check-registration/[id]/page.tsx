@@ -5,7 +5,6 @@ import {useEffect, useState} from "react";
 import {getRegi, Rega} from "@/app/api/userActions/getRegi";
 import {useCommonState} from "@/state/common/commonState";
 import {useRouter} from "next/navigation";
-import {LogoutAction} from "@/components/auth/logout";
 import {getUserId} from "@/components/auth/getUserId";
 import {FullRegaCard} from "@/components/events/regaCard";
 import Link from "next/link";
@@ -34,7 +33,6 @@ const CheckRegistrationPage: React.FC<PageProps> = ({params}) => {
     })
 
     const isAuthorized = useCommonState((state) => state.isAuthorized)
-    const setIsAuthorized = useCommonState((state) => state.setIsAuthorized)
     const isAuthorizedCheck = useCommonState((state) => state.isAuthorizedCheck);
 
     useEffect(() => {
@@ -93,7 +91,6 @@ const CheckRegistrationPage: React.FC<PageProps> = ({params}) => {
         }
     }
 
-    const router = useRouter()
     return (
         <VStack w='full' justifyContent='space-between' flexGrow={1}>
             <Box/>
@@ -113,15 +110,15 @@ const CheckRegistrationPage: React.FC<PageProps> = ({params}) => {
                     </>}
             </VStack>
 
-            <Box>
-                {isAuthorized && <Button colorScheme='zhgut' onClick={() => {
-                    LogoutAction().then(() => {
-                        setIsAuthorized(false)
-                        router.push('/')
-                    })
-                }
-                }>выйти из аккаунта</Button>}
-            </Box>
+            {/*<Box>*/}
+            {/*    {isAuthorized && <Button colorScheme='zhgut' onClick={() => {*/}
+            {/*        LogoutAction().then(() => {*/}
+            {/*            setIsAuthorized(false)*/}
+            {/*            router.push('/')*/}
+            {/*        })*/}
+            {/*    }*/}
+            {/*    }>выйти из аккаунта</Button>}*/}
+            {/*</Box>*/}
 
         </VStack>
     )
