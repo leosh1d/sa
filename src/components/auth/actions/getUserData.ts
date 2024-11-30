@@ -1,8 +1,9 @@
 'use server'
 
 import {getAccessToken} from "@/components/auth/getAccessToken";
+import {cookies} from "next/headers";
 
-export const getUserData = async ()=> {
+export const getUserData = async () => {
     const token = await getAccessToken()
 
     const res = await fetch('https://api.vk.com/method/account.getProfileInfo?' + new URLSearchParams({
@@ -11,6 +12,10 @@ export const getUserData = async ()=> {
     }).toString(), {
         method: "POST"
     })
-    console.warn(res)
-    return await res.json()
+
+    const unpdacked = await res.json()
+
+    cookies().set(`user_id`, unpdacked.response.id)
+
+    return unpdacked
 }
