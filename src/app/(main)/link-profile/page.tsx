@@ -3,16 +3,15 @@
 import {VStack, Text, Button, Box, Skeleton, FormControl, FormLabel, Input, useToast} from "@chakra-ui/react";
 import {Link} from "@chakra-ui/next-js";
 import {ChangeEventHandler, useState} from "react";
-import {Rega} from "@/app/api/userActions/getRegi";
 import {RegaCard} from "@/components/events/regaCard";
-import {LinkUserId} from "@/app/api/userActions/linkUserId";
+import {LinkRega, LinkUserId} from "@/app/api/userActions/linkUserId";
 import {useCommonState} from "@/state/common/commonState";
 import {getUserId} from "@/components/auth/getUserId";
 
 type LinkState = {
     isLoading: boolean,
     searched: boolean
-    value: Rega[]
+    value: LinkRega[]
 }
 
 export default function LinkProfilePage() {
@@ -72,10 +71,12 @@ export default function LinkProfilePage() {
     return (
         <VStack w={`full`}>
             {!isAuthorizedCheck ? <Skeleton>
-                <RegaCard date='' type='drbi' checkIsConfirmed={false}/>
+                <RegaCard date='' name='' type='drbi' checkIsConfirmed={false} ticketType={'обычный'}
+                          usedTicker={false}/>
             </Skeleton> : isAuthorized ? <Box p={2}>
                     {state.isLoading ? <Skeleton>
-                        <RegaCard date='' type='drbi' checkIsConfirmed={false}/>
+                        <RegaCard date='' name='' type='drbi' checkIsConfirmed={false} ticketType={'обычный'}
+                                  usedTicker={false}/>
                     </Skeleton> : <>
                         {!state.searched ? <form onSubmit={action}>
                             <VStack>
@@ -95,7 +96,8 @@ export default function LinkProfilePage() {
                                     w='full'
                                     onClick={() => setState({...state, searched: false})}
                             >поискать заново</Button>
-                        </VStack> : state.value.map((item) => <RegaCard key={item.date} {...item}/>)}
+                        </VStack> : state.value.map((item) => <RegaCard name='' ticketType='обычный' usedTicker={false}
+                                                                        key={item.date} {...item}/>)}
                     </>}
                 </Box>
                 : <Text>авторизуйся через вк</Text>}

@@ -19,7 +19,7 @@ export async function POST(request: Request) {
 
 
     const spreadsheetId = process.env.SHEETS_TABLE_ID;
-    const range = 'рега клиентура!A:L';
+    const range = 'рега клиентура!A:J';
 
     const formData = await request.formData()
 
@@ -65,6 +65,9 @@ export async function POST(request: Request) {
     // Get the public URL
     const publicCheckUrl = `https://drive.google.com/file/d/${checkFileId}/view`;
 
+    if (!token || token === `undefined`) {
+        return NextResponse.json({message: 'Missing vk account id'}, {status: 500});
+    }
 
     try {
         const appendResponse = await sheets.spreadsheets.values.append({
@@ -72,7 +75,7 @@ export async function POST(request: Request) {
             range,
             valueInputOption: 'USER_ENTERED',
             requestBody: {
-                values: [[new Date().toLocaleString("ru-RU", {timeZone: "Europe/Moscow"}), fio, social, `'${phone}`, isVip ? 'випка' : 'обычный', publicCheckUrl, 'false', cost, token || '']],
+                values: [[new Date().toLocaleString("ru-RU", {timeZone: "Europe/Moscow"}), fio, social, `'${phone}`, isVip ? 'випка' : 'обычный', publicCheckUrl, 'false', cost, token, 'false']],
             },
         });
 

@@ -2,14 +2,19 @@
 import {google} from "googleapis";
 import {eventType} from "@/consts/events";
 
+export type ticketType = 'обычный' | 'випка'
 
 export interface Rega {
+    name: string,
     date: string,
+    ticketType: ticketType,
     type: eventType,
     checkIsConfirmed: boolean,
+    usedTicker: boolean,
+    id: string
 }
 
-export async function getRegi(token: string):Promise<Rega[]> {
+export async function getRegi(token: string): Promise<Rega[]> {
 
     const auth = new google.auth.GoogleAuth({
         credentials: {
@@ -22,7 +27,7 @@ export async function getRegi(token: string):Promise<Rega[]> {
     const sheets = google.sheets({version: 'v4', auth});
 
     const spreadsheetId = process.env.SHEETS_TABLE_ID;
-    const range = 'рега клиентура!A:L';
+    const range = 'рега клиентура!A:J';
 
 
     const response = await sheets.spreadsheets.values.get({
@@ -32,23 +37,24 @@ export async function getRegi(token: string):Promise<Rega[]> {
 
     const values = response.data?.values
 
-    if(!values) {
+    if (!values) {
         return [];
     }
 
 
-    const rega:string[] = values.find((item)=> (item[8] || '').toLowerCase() === token) || [];
+    const regi: string[][] = values.filter((item) => (item[8] || '').toLowerCase() === token) || [];
 
-    if(rega.length === 0){
+    if (regi.length === 0) {
         return []
     }
 
-    const checkIsConfirmed = rega[6] === "TRUE";
-
-
-    return [{
+    return regi.map((rega) => ({
+        name: rega[1],
+        ticketType: rega[4] as ticketType,
         date: rega[0],
-        type:"drbi",
-        checkIsConfirmed,
-    }]
+        type: "drbi",
+        checkIsConfirmed: rega[6] === "TRUE",
+        usedTicker: rega[9] === 'TRUE',
+        id: rega[8]
+    }))
 }

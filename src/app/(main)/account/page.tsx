@@ -35,7 +35,7 @@ export default function AccountPage() {
                 const regi = await getRegi(userId)
                 setState({isLoading: false, value: regi, searched: true})
             } else {
-                setState({isLoading: isAuthorizedCheck, value: [], searched: true})
+                setState({isLoading: !isAuthorizedCheck, value: [], searched: true})
             }
         }
         action()
@@ -43,6 +43,8 @@ export default function AccountPage() {
 
 
     const router = useRouter()
+
+    console.warn(state.value)
     return (
         <VStack w='full' justifyContent='space-between' flexGrow={1}>
             <Box/>
@@ -51,7 +53,7 @@ export default function AccountPage() {
 
                 {(!isAuthorized && isAuthorizedCheck) ?
                     <Text>ты не авторизован!</Text> : (state.isLoading || !state.searched) ? <Skeleton>
-                        <RegaCard date='' type='drbi' checkIsConfirmed={false}/>
+                        <RegaCard date='' type='drbi' checkIsConfirmed={false} name={''} ticketType={'обычный'} usedTicker={false} id={''}/>
                     </Skeleton> : <>
                         {state.value.length === 0 ? <>
                             <Text>пока нет оплаченных проходок </Text>

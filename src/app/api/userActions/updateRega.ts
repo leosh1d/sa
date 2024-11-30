@@ -1,17 +1,9 @@
 'use server'
 import {google} from "googleapis";
-import {eventType} from "@/consts/events";
-import {getUserId} from "@/components/auth/getUserId";
+import {Rega, ticketType} from "@/app/api/userActions/getRegi";
 
 
-export interface LinkRega {
-    date: string,
-    type: eventType,
-    checkIsConfirmed: boolean,
-    isHaveId: boolean
-}
-
-export async function LinkUserId(fio: string): Promise<LinkRega[]> {
+export async function UpdateRega(fio: string): Promise<Rega[]> {
 
     const auth = new google.auth.GoogleAuth({
         credentials: {
@@ -42,36 +34,38 @@ export async function LinkUserId(fio: string): Promise<LinkRega[]> {
     const rega: string[] = values.find((item) => item[1].toLowerCase().replace(' ', '') === fio.toLowerCase().replace(' ', '')) || [];
 
 
+    console.warn(rega)
     if (rega.length === 0) {
         return []
     }
 
-    const checkIsConfirmed = rega[6] === "TRUE";
-
-    const userId = await getUserId()
-    if (rega[8] === '' || rega[8] === undefined) {
-        const updateRange = `рега клиентура!I${rowIndex + 1}`; // Преобразуем индекс строки в номер (нумерация начинается с 1)
+    if (rega[9] === 'FALSE' || rega[9] === '') {
+        const updateRange = `рега клиентура!J${rowIndex + 1}`; // Преобразуем индекс строки в номер (нумерация начинается с 1)
         await sheets.spreadsheets.values.update({
             spreadsheetId: spreadsheetId as string,
             range: updateRange,
             valueInputOption: "RAW",
             requestBody: {
-                values: [[userId]], // Записываем userId в ячейку
+                values: [[true]],
             },
         });
 
         return [{
             date: rega[0],
+            name: rega[1],
             type: "drbi",
-            checkIsConfirmed,
-            isHaveId: false
+            checkIsConfirmed: rega[6] === "TRUE",
+            ticketType: rega[4] as ticketType,
+            usedTicker: true,
         }]
     } else {
         return [{
             date: rega[0],
+            name: rega[1],
             type: "drbi",
-            checkIsConfirmed,
-            isHaveId: true
+            checkIsConfirmed: rega[6] === "TRUE",
+            ticketType: rega[4] as ticketType,
+            usedTicker: false,
         }]
     }
 }
