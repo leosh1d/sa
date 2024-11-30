@@ -51,6 +51,7 @@ export async function UpdateRega(fio: string): Promise<Rega[]> {
         });
 
         return [{
+            id: rega[8],
             date: rega[0],
             name: rega[1],
             type: "drbi",
@@ -60,6 +61,7 @@ export async function UpdateRega(fio: string): Promise<Rega[]> {
         }]
     } else {
         return [{
+            id: rega[8],
             date: rega[0],
             name: rega[1],
             type: "drbi",
