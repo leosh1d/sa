@@ -46,7 +46,7 @@ export const RegaCard: FC<Rega> = ({checkIsConfirmed, date, id}) => {
             </VStack>
 
             <Flex justifyContent='center' alignItems='center' pb={6}>
-                <QRCodeSVG value={`${process.env.NODE_ENV === "development" ? baseDomainDev : baseDomainProd}/check-registration/${id}`}/>
+                <QRCodeSVG value={`https://studaktivbi.ru/check-registration/${id}`}/>
             </Flex>
 
 
