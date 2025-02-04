@@ -8,9 +8,9 @@ export default function Home() {
     return (
         <Container maxW='container.xl' minH='100vh'>
             <VStack w='full'>
-                <EventCard active eventType={'drbi'} title={'др би'}
-                           description={'день рождения образовательной программы «бизнес-информатика», на котором студенты и преподаватели проводят совместный досуг, общаются, смотрят на выступления приглашеных гостей'}
-                           href={'/drbi'}/>
+                <EventCard active eventType={'gya'} title={'гори ясно'}
+                           description={''}
+                           href={'/gya'}/>
                 <PromoSection/>
                 <EventCarousel/>
             </VStack>
