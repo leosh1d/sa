@@ -8,7 +8,7 @@ export default function Home() {
     return (
         <Container maxW='container.xl' minH='100vh'>
             <VStack w='full'>
-                <EventCard active eventType={'povishay'} title={'гори ясно'}
+                <EventCard active eventType={'povishay'} title={'повышай'}
                            description={''}
                            href={'/povishay'}/>
                 <PromoSection/>
